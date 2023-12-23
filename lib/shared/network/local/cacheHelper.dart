@@ -8,14 +8,23 @@ class cacheHelper {
 
   static Future<bool> setData({
     required String key,
-    required bool value,
+    required dynamic value,
   }) async {
+    if (value is String) {
+      return await sharedPreferences!.setString(key, value);
+    }
+    if (value is int) {
+      return await sharedPreferences!.setInt(key, value);
+    }
+    if (value is double) {
+      return await sharedPreferences!.setDouble(key, value);
+    }
     return await sharedPreferences!.setBool(key, value);
   }
 
-  static bool? getData({
+  static dynamic getData({
     required String key,
   }) {
-    return sharedPreferences!.getBool(key);
+    return sharedPreferences!.get(key);
   }
 }

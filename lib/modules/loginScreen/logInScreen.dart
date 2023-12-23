@@ -8,6 +8,7 @@ import 'package:shop_app/modules/registerScreen/registerScreen.dart';
 import 'package:shop_app/shared/components/components.dart';
 import 'package:shop_app/shared/cubit/loginCubit/loginCubit.dart';
 import 'package:shop_app/shared/cubit/loginCubit/loginStates.dart';
+import 'package:shop_app/shared/network/local/cacheHelper.dart';
 
 class logInScreen extends StatelessWidget {
   var formKey = GlobalKey<FormState>();
@@ -22,9 +23,15 @@ class logInScreen extends StatelessWidget {
       listener: (BuildContext context, myLoginStates state) {
         if (state is loginSuccessState) {
           if (state.login_model.status) {
+            cacheHelper.setData(
+              key: 'token',
+              value: state.login_model.data?.token,
+            );
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => profile()),
+              MaterialPageRoute(
+                  builder: (context) =>
+                      profile(myLoginCubit.get(context).login_model)),
             );
             print(state.login_model.message);
             print(state.login_model.data?.token);
@@ -164,31 +171,6 @@ class logInScreen extends StatelessWidget {
                                                   cubit.passwordController.text,
                                             );
                                           }
-                                          // cubit.valid(
-                                          //     user: cubit.emailController.text,
-                                          //     pass: cubit.passwordController.text);
-                                          // if (formKey.currentState!.validate()) {
-                                          //   if (cubit.li[0] == "valid") {
-                                          //     print("valid ${cubit.li[0]}");
-
-                                          //     cubit.changeMassage(mass: "");
-                                          //     Navigator.push(
-                                          //         context,
-                                          //         MaterialPageRoute(
-                                          //             builder: (context) => profile()));
-                                          //   } else if (cubit.li[0] == "notPass") {
-                                          //     print("notPass ${cubit.li[0]}");
-
-                                          //     cubit.changeMassage(
-                                          //         mass: "Invalid Password");
-                                          //   }
-                                          //   if (cubit.li[0] == "notFound") {
-                                          //     print("notFound ${cubit.li[0]}");
-                                          //     cubit.changeMassage(mass: "Invalid User");
-                                          //   }
-                                          //   print(cubit.emailController.text);
-                                          //   print(cubit.passwordController.text);
-                                          // }
                                         },
                                         widget: (Text("LogIn")),
                                       ),

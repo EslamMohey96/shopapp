@@ -3,6 +3,7 @@ import 'package:shop_app/models/boardingModel.dart';
 import 'package:shop_app/modules/loginScreen/logInScreen.dart';
 import 'package:shop_app/shared/components/components.dart';
 import 'package:shop_app/shared/cubit/shopCubit/shopCubit.dart';
+import 'package:shop_app/shared/network/local/cacheHelper.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class onBoarding extends StatelessWidget {
@@ -41,18 +42,13 @@ class onBoarding extends StatelessWidget {
               ),
             ),
             onPressed: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => logInScreen(),
-                ),
-                (route) => false,
-              );
+              onSubmit(context);
             },
             child: Text(
               "Skip",
             ),
-          )
+          ),
+          sizeBoxW(20),
         ],
       ),
       body: Padding(
@@ -106,13 +102,7 @@ class onBoarding extends StatelessWidget {
                   FloatingActionButton(
                     onPressed: () {
                       if (shopCubit.get(context).index == boarding.length - 1) {
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => logInScreen(),
-                          ),
-                          (route) => false,
-                        );
+                        onSubmit(context);
                       } else {
                         onBoardingController.nextPage(
                           duration: Duration(milliseconds: 750),
@@ -120,7 +110,7 @@ class onBoarding extends StatelessWidget {
                         );
                       }
                     },
-                    child: Icon(Icons.arrow_forward),
+                    child: Icon(Icons.arrow_forward_ios),
                   )
                 ],
               ),
@@ -168,5 +158,24 @@ class onBoarding extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void onSubmit(context) {
+    cacheHelper
+        .setData(
+      key: "onBoarding",
+      value: true,
+    )
+        .then((value) {
+      if (value) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => logInScreen(),
+          ),
+          (route) => false,
+        );
+      }
+    });
   }
 }

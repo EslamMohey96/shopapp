@@ -83,9 +83,23 @@ class myLoginCubit extends Cubit<myLoginStates> {
       },
     ).then((value) {
       login_model = loginModel.fromJson(value.data);
-      // print(login_model.message);
-      // print(login_model.data?.token);
-      // print(value.data);
+      emit(loginSuccessState(login_model));
+    }).catchError((onError) {
+      emit(loginErrorState(onError.toString()));
+    });
+  }
+
+  void userData({
+    required token,
+  }) {
+    emit(loginLoadingState());
+    dioHelper.getData(
+      url: login,
+      queryParameter: {
+        "Authorization": token,
+      },
+    ).then((value) {
+      login_model = loginModel.fromJson(value.data);
       emit(loginSuccessState(login_model));
     }).catchError((onError) {
       emit(loginErrorState(onError.toString()));
