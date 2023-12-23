@@ -32,6 +32,14 @@ class onBoarding extends StatelessWidget {
       appBar: AppBar(
         actions: [
           TextButton(
+            style: TextButton.styleFrom(
+              fixedSize: const Size(50, 20),
+              backgroundColor: Colors.red,
+              foregroundColor: Colors.black,
+              textStyle: const TextStyle(
+                fontSize: 15,
+              ),
+            ),
             onPressed: () {
               Navigator.pushAndRemoveUntil(
                 context,
@@ -43,11 +51,6 @@ class onBoarding extends StatelessWidget {
             },
             child: Text(
               "Skip",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
             ),
           )
         ],
@@ -79,7 +82,7 @@ class onBoarding extends StatelessWidget {
                         activeDotDecoration: DotDecoration(
                           width: 32,
                           height: 12,
-                          color: Colors.teal,
+                          color: Colors.red,
                           rotationAngle: 180,
                           verticalOffset: -10,
                           borderRadius: BorderRadius.circular(24),

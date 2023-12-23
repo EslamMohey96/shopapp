@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/painting.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/modules/profile/profile.dart';
 import 'package:shop_app/modules/registerScreen/registerScreen.dart';
@@ -48,61 +49,14 @@ class logInScreen extends StatelessWidget {
       builder: (BuildContext context, myLoginStates state) {
         myLoginCubit cubit = myLoginCubit.get(context);
         return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.teal,
-            leading: const Icon(
-              Icons.menu,
-            ),
-            title: const Text(
-              "Login Screen",
-            ),
-            actions: [
-              IconButton(
-                  onPressed: () {
-                    // anonymous function
-                    print("notify");
-                  },
-                  icon: Icon(Icons.notification_important)),
-              IconButton(
-                  onPressed: () {
-                    print("search");
-                  },
-                  icon: Icon(Icons.search)),
-            ],
-          ),
+          appBar: AppBar(),
           body: Container(
-            color: Colors.tealAccent,
+            color: Colors.white,
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // FadeInUp(
-                  //   child: Container(
-                  //     height: 350,
-                  //     child: Stack(
-                  //       children: images
-                  //           .asMap()
-                  //           .entries
-                  //           .map((e) => Positioned(
-                  //                 bottom: 0,
-                  //                 left: 0,
-                  //                 right: 0,
-                  //                 top: 0,
-                  //                 child: AnimatedOpacity(
-                  //                   opacity:
-                  //                       cubit.activateIndex == e.key ? 1 : 0,
-                  //                   duration: Duration(seconds: 1),
-                  //                   child: Image.network(
-                  //                     e.value,
-                  //                     height: 200,
-                  //                   ),
-                  //                 ),
-                  //               ))
-                  //           .toList(),
-                  //     ),
-                  //   ),
-                  // ),
                   Center(
                     child: SingleChildScrollView(
                       child: Form(
@@ -114,12 +68,26 @@ class logInScreen extends StatelessWidget {
                               duration: Duration(milliseconds: 1500),
                               child: Column(
                                 children: [
-                                  const Text(
-                                    'LogIn',
-                                    style: TextStyle(
-                                      fontSize: 40,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Text(
+                                        'Electronic',
+                                        style: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 40,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      sizeBoxW(10),
+                                      const Text(
+                                        'Markit',
+                                        style: TextStyle(
+                                          fontSize: 40,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                   const Text(
                                     'Login now to browse our hot offers.',
@@ -150,7 +118,7 @@ class logInScreen extends StatelessWidget {
                                 },
                               ),
                             ),
-                            sizeBoxH(10),
+                            sizeBoxH(20),
                             FadeInLeft(
                               delay: Duration(milliseconds: 300),
                               duration: Duration(milliseconds: 1500),
@@ -177,47 +145,53 @@ class logInScreen extends StatelessWidget {
                                 },
                               ),
                             ),
-                            sizeBoxH(10),
+                            sizeBoxH(20),
                             FadeInUp(
                               delay: Duration(milliseconds: 300),
                               duration: Duration(milliseconds: 1500),
                               child: state is! loginLoadingState
-                                  ? defaultButton(
-                                      function: () {
-                                        if (formKey.currentState!.validate()) {
-                                          cubit.userLogin(
-                                            email: cubit.emailController.text,
-                                            password:
-                                                cubit.passwordController.text,
-                                          );
-                                        }
-                                        // cubit.valid(
-                                        //     user: cubit.emailController.text,
-                                        //     pass: cubit.passwordController.text);
-                                        // if (formKey.currentState!.validate()) {
-                                        //   if (cubit.li[0] == "valid") {
-                                        //     print("valid ${cubit.li[0]}");
+                                  ? Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      child: defaultButton(
+                                        function: () {
+                                          if (formKey.currentState!
+                                              .validate()) {
+                                            cubit.userLogin(
+                                              email: cubit.emailController.text,
+                                              password:
+                                                  cubit.passwordController.text,
+                                            );
+                                          }
+                                          // cubit.valid(
+                                          //     user: cubit.emailController.text,
+                                          //     pass: cubit.passwordController.text);
+                                          // if (formKey.currentState!.validate()) {
+                                          //   if (cubit.li[0] == "valid") {
+                                          //     print("valid ${cubit.li[0]}");
 
-                                        //     cubit.changeMassage(mass: "");
-                                        //     Navigator.push(
-                                        //         context,
-                                        //         MaterialPageRoute(
-                                        //             builder: (context) => profile()));
-                                        //   } else if (cubit.li[0] == "notPass") {
-                                        //     print("notPass ${cubit.li[0]}");
+                                          //     cubit.changeMassage(mass: "");
+                                          //     Navigator.push(
+                                          //         context,
+                                          //         MaterialPageRoute(
+                                          //             builder: (context) => profile()));
+                                          //   } else if (cubit.li[0] == "notPass") {
+                                          //     print("notPass ${cubit.li[0]}");
 
-                                        //     cubit.changeMassage(
-                                        //         mass: "Invalid Password");
-                                        //   }
-                                        //   if (cubit.li[0] == "notFound") {
-                                        //     print("notFound ${cubit.li[0]}");
-                                        //     cubit.changeMassage(mass: "Invalid User");
-                                        //   }
-                                        //   print(cubit.emailController.text);
-                                        //   print(cubit.passwordController.text);
-                                        // }
-                                      },
-                                      widget: (Text("LogIn")),
+                                          //     cubit.changeMassage(
+                                          //         mass: "Invalid Password");
+                                          //   }
+                                          //   if (cubit.li[0] == "notFound") {
+                                          //     print("notFound ${cubit.li[0]}");
+                                          //     cubit.changeMassage(mass: "Invalid User");
+                                          //   }
+                                          //   print(cubit.emailController.text);
+                                          //   print(cubit.passwordController.text);
+                                          // }
+                                        },
+                                        widget: (Text("LogIn")),
+                                      ),
                                     )
                                   : Center(child: CircularProgressIndicator()),
                             ),
@@ -242,7 +216,12 @@ class logInScreen extends StatelessWidget {
                                                   const registerScreen()),
                                         );
                                       },
-                                      child: const Text('Register Now'))
+                                      child: const Text(
+                                        'Register Now',
+                                        style: const TextStyle(
+                                          color: Colors.red,
+                                        ),
+                                      ))
                                 ],
                               ),
                             )

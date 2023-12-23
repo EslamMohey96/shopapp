@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 ThemeData darkMode = ThemeData(
   primarySwatch: Colors.teal,
   floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: Colors.teal,
+    backgroundColor: Colors.red,
   ),
   appBarTheme: AppBarTheme(
     iconTheme: IconThemeData(
@@ -44,17 +44,18 @@ ThemeData darkMode = ThemeData(
 
 ThemeData lightMode = ThemeData(
   floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: Colors.teal,
+    backgroundColor: Colors.red,
+    foregroundColor: Colors.black,
   ),
   appBarTheme: AppBarTheme(
     iconTheme: IconThemeData(
-      color: Colors.white,
+      color: Colors.red,
     ),
     titleTextStyle: TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.bold,
     ),
-    backgroundColor: Colors.teal,
+    backgroundColor: Colors.white,
     // ward
     // elevation: 0,
     systemOverlayStyle: SystemUiOverlayStyle(

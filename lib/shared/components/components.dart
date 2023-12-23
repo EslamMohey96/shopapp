@@ -3,13 +3,18 @@ import 'package:flutter/material.dart';
 //defaultButton
 Widget defaultButton({
   double width = double.infinity,
-  Color background = Colors.teal,
+  Color background = Colors.red,
   required Function() function,
   required Widget widget,
 }) =>
     Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(
+          10,
+        ),
+        color: background,
+      ),
       width: width,
-      color: background,
       child: MaterialButton(
         onPressed: function,
         child: widget,
@@ -48,12 +53,19 @@ Widget textFormField({
       validator: valid,
       onTap: ontap,
       enabled: isClickable,
+      cursorColor: Colors.black,
       decoration: InputDecoration(
         labelText: labelText,
+        labelStyle: TextStyle(
+          fontSize: 15,
+        ),
         prefixIcon: prefixIcon,
         suffixIcon: IconButton(
           icon: Icon(suffixIcon),
           onPressed: suffixPressed,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red),
         ),
         border: const OutlineInputBorder(),
       ),
