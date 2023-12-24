@@ -21,50 +21,6 @@ class myLoginCubit extends Cubit<myLoginStates> {
     emit(changeMassageState());
   }
 
-  late Map<String, dynamic> allUsers = {};
-  void getAllUser() {
-    emit(getAllUsersLoadingState());
-    dioHelper
-        .getData(
-      url: urlMethod,
-      queryParameter: users,
-    )
-        .then((value) {
-      print("get is done");
-      allUsers = value.data;
-      print(allUsers);
-      emit(getAllUsersSuccessState());
-    }).catchError((onError) {
-      emit(getAllUsersErrorState(onError.toString()));
-    });
-  }
-
-  valid({
-    required user,
-    required pass,
-  }) {
-    li = [];
-    for (int value = 0; value < allUsers["data"].length; value++) {
-      print(value);
-
-      if (allUsers["data"][value]["email"] == user) {
-        if (allUsers["data"][value]["first_name"] == pass) {
-          print("trying");
-          li.add("valid");
-          li.add(value);
-          break;
-        } else {
-          li.add("notPass");
-          li.add(0);
-          break;
-        }
-      }
-    }
-    if (li.length == 0) {
-      li = ["notFound", 0];
-    }
-  }
-
   void changeVisiblePassword(bool pass) {
     visiblePassword = pass;
     emit(myLogvisiblePasswordState());
@@ -83,9 +39,6 @@ class myLoginCubit extends Cubit<myLoginStates> {
       },
     ).then((value) {
       login_model = loginModel.fromJson(value.data);
-      // print(login_model.message);
-      // print(login_model.data?.token);
-      // print(value.data);
       emit(loginSuccessState(login_model));
     }).catchError((onError) {
       emit(loginErrorState(onError.toString()));

@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/painting.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shop_app/modules/profile/profile.dart';
-import 'package:shop_app/modules/registerScreen/registerScreen.dart';
+import 'package:shop_app/layout/shopLayout.dart';
+import 'package:shop_app/modules/userScreens/profile/profile.dart';
+import 'package:shop_app/modules/userScreens/registerScreen/registerScreen.dart';
 import 'package:shop_app/shared/components/components.dart';
+import 'package:shop_app/shared/components/constants.dart';
 import 'package:shop_app/shared/cubit/loginCubit/loginCubit.dart';
 import 'package:shop_app/shared/cubit/loginCubit/loginStates.dart';
+import 'package:shop_app/shared/network/local/cacheHelper.dart';
 
 class logInScreen extends StatelessWidget {
   var formKey = GlobalKey<FormState>();
@@ -22,10 +25,22 @@ class logInScreen extends StatelessWidget {
       listener: (BuildContext context, myLoginStates state) {
         if (state is loginSuccessState) {
           if (state.login_model.status) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => profile()),
-            );
+            cacheHelper
+                .setData(
+              key: 'token',
+              value: state.login_model.data!.token,
+            )
+                .then((value) {
+              Token = cacheHelper.getData(
+                key: 'token',
+              );
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => shopLayout()),
+              );
+            });
+            // myLoginCubit.get(context).changeToken(token: state.login_model.data!.token,context:context );
+
             print(state.login_model.message);
             print(state.login_model.data?.token);
           } else if (!state.login_model.status) {
@@ -175,7 +190,7 @@ class logInScreen extends StatelessWidget {
                                           //     Navigator.push(
                                           //         context,
                                           //         MaterialPageRoute(
-                                          //             builder: (context) => profile()));
+                                          //             builder: (context) => shopLayout()));
                                           //   } else if (cubit.li[0] == "notPass") {
                                           //     print("notPass ${cubit.li[0]}");
 

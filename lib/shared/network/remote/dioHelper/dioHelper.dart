@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:shop_app/shared/components/constants.dart';
 
 class dioHelper {
@@ -8,7 +9,6 @@ class dioHelper {
       BaseOptions(
         baseUrl: baseURL,
         receiveDataWhenStatusError: true,
-        headers: headers,
       ),
     );
     print("init");
@@ -16,11 +16,17 @@ class dioHelper {
 
   static Future<Response<dynamic>> getData({
     required String url,
-    required Map<String, dynamic> queryParameter,
+    Map<String, dynamic>? queryParameter,
+    String lang = 'eng',
+    String? token = '',
   }) async {
-    return await dio!.get(
+     dio!.options.headers = {
+      'Content-Type': 'application/json',
+      'lang': lang,
+      'Authorization': token,
+    };
+    return await dio!.get( 
       url,
-      queryParameters: queryParameter,
     );
   }
 
@@ -29,15 +35,14 @@ class dioHelper {
     Map<String, dynamic>? queryParameter,
     required Map<String, dynamic> data,
     String lang = 'eng',
-    String? token,
+    String? token = '',
   }) async {
     dio!.options.headers = {
+      'Content-Type': 'application/json',
       'lang': lang,
-      'Authorization': token,
     };
     return await dio!.post(
       url,
-      queryParameters: queryParameter,
       data: data,
     );
   }

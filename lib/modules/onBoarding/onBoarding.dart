@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/models/boardingModel.dart';
-import 'package:shop_app/modules/loginScreen/logInScreen.dart';
+import 'package:shop_app/modules/userScreens/loginScreen/logInScreen.dart';
 import 'package:shop_app/shared/components/components.dart';
-import 'package:shop_app/shared/cubit/shopCubit/shopCubit.dart';
+import 'package:shop_app/shared/cubit/onBoardingCubit/onBoardingCubit.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class onBoarding extends StatelessWidget {
@@ -67,7 +67,7 @@ class onBoarding extends StatelessWidget {
                     boardingItem(borading: boarding[index]),
                 itemCount: boarding.length,
                 onPageChanged: (index) =>
-                    shopCubit.get(context).changeIndex(i: index),
+                    onBoardingCubit.get(context).changeIndex(i: index),
               ),
             ),
             sizeBoxH(40),
@@ -105,7 +105,7 @@ class onBoarding extends StatelessWidget {
                   Spacer(),
                   FloatingActionButton(
                     onPressed: () {
-                      if (shopCubit.get(context).index == boarding.length - 1) {
+                      if (onBoardingCubit.get(context).index == boarding.length - 1) {
                         Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(

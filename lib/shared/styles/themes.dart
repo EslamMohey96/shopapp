@@ -52,6 +52,7 @@ ThemeData lightMode = ThemeData(
       color: Colors.red,
     ),
     titleTextStyle: TextStyle(
+      color: Colors.red,
       fontSize: 20,
       fontWeight: FontWeight.bold,
     ),
@@ -63,9 +64,9 @@ ThemeData lightMode = ThemeData(
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     type: BottomNavigationBarType.fixed,
-    backgroundColor: Colors.teal,
-    selectedItemColor: Colors.black,
-    unselectedItemColor: Colors.white54,
+    backgroundColor: Colors.white,
+    selectedItemColor: Colors.red,
+    unselectedItemColor: const Color.fromARGB(137, 15, 12, 12),
   ),
   scaffoldBackgroundColor: Colors.white,
   textTheme: TextTheme(

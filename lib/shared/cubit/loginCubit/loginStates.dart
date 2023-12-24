@@ -19,6 +19,8 @@ class getAllUsersLoadingState extends myLoginStates {}
 
 class changeMassageState extends myLoginStates {}
 
+class changeTokenState extends myLoginStates {}
+
 class loginLoadingState extends myLoginStates {}
 
 class loginSuccessState extends myLoginStates {
