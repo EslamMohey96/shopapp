@@ -39,8 +39,6 @@ class logInScreen extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => shopLayout()),
               );
             });
-            // myLoginCubit.get(context).changeToken(token: state.login_model.data!.token,context:context );
-
             print(state.login_model.message);
             print(state.login_model.data?.token);
           } else if (!state.login_model.status) {
@@ -179,6 +177,8 @@ class logInScreen extends StatelessWidget {
                                                   cubit.passwordController.text,
                                             );
                                           }
+
+                                          
                                           // cubit.valid(
                                           //     user: cubit.emailController.text,
                                           //     pass: cubit.passwordController.text);

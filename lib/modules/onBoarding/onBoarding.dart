@@ -52,7 +52,8 @@ class onBoarding extends StatelessWidget {
             child: Text(
               "Skip",
             ),
-          )
+          ),
+          sizeBoxW(10),
         ],
       ),
       body: Padding(

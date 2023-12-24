@@ -21,7 +21,7 @@ void main() async {
   dioHelper.init();
   await cacheHelper.init();
   Widget startPage;
-  Token = cacheHelper.getData(key: 'token');
+  Token = cacheHelper.getData(key: 'token')== null ? '' :  cacheHelper.getData(key: 'token');
   bool? isDark = cacheHelper.getData(key: "isDark") == null ? false : true;
   bool? onBoard = cacheHelper.getData(key: "onBoarding");
   bool? isLogin = cacheHelper.getData(key: "isLogin");
@@ -54,7 +54,9 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: ((BuildContext context) => shopCubit()..getHomeData()),
+          create: ((BuildContext context) => shopCubit()
+          ..getHomeData()
+          ),
         ),
         BlocProvider(
           create: ((BuildContext context) =>

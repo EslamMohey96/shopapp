@@ -15,7 +15,8 @@ class categories extends StatelessWidget {
         return Scaffold(
           body: Center(
             child: Text(
-              "${cubit.home_model.data.banners[1].product}",
+              // "${cubit.home_model.data.banners[1].product}",
+              ''
             ),
           ),
         );

@@ -20,13 +20,21 @@ class dioHelper {
     String lang = 'eng',
     String? token = '',
   }) async {
-     dio!.options.headers = {
+    //  dio!.options.headers = {
+    //   'Content-Type': 'application/json',
+    //   'lang': lang,
+    //   'Authorization': token,
+    // };
+    return await dio!.get( 
+      // 'https://student.valuxapps.com/api/${url}',
+      url,
+      options:Options(
+        headers: {
       'Content-Type': 'application/json',
       'lang': lang,
       'Authorization': token,
-    };
-    return await dio!.get( 
-      url,
+    },
+      ),
     );
   }
 
@@ -37,13 +45,20 @@ class dioHelper {
     String lang = 'eng',
     String? token = '',
   }) async {
-    dio!.options.headers = {
-      'Content-Type': 'application/json',
-      'lang': lang,
-    };
+    // dio!.options.headers = {
+    //   'Content-Type': 'application/json',
+    //   'lang': lang,
+    // };
     return await dio!.post(
       url,
       data: data,
+      options:Options(
+        headers:  {
+      'Content-Type': 'application/json',
+      'lang': lang,
+      'Authorization': token,
+    },
+      ),
     );
   }
 }

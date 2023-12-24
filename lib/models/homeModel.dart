@@ -2,6 +2,8 @@ class homeModel {
   late bool status;
   late dataModel data;
 
+  static homeModel sModel = homeModel.fromJson(model);
+
   homeModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     data = dataModel.fromJson(json['data']);
@@ -57,7 +59,7 @@ class productsModel {
   }
 }
 
-var i = {
+var model = {
   "status": true,
   "message": null,
   "data": {
