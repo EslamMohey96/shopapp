@@ -2,8 +2,6 @@ class homeModel {
   late bool status;
   late dataModel data;
 
-  static homeModel sModel = homeModel.fromJson(model);
-
   homeModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     data = dataModel.fromJson(json['data']);
@@ -17,10 +15,11 @@ class dataModel {
 
   dataModel.fromJson(Map<String, dynamic> json) {
     json['banners'].forEach((element) {
-      banners.add(element);
+      banners.add(bannersModel.fromJson(element));
     });
+
     json['products'].forEach((element) {
-      products.add(element);
+      products.add(productsModel.fromJson(element));
     });
   }
 }
@@ -33,8 +32,8 @@ class bannersModel {
   bannersModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     image = json['image'];
-    category = json['category'];
-    product = json['product'];
+    // category = json['category'];
+    // product = json['product'];
   }
 }
 
@@ -143,9 +142,9 @@ var model = {
         "discount": 0,
         "image":
             "https://student.valuxapps.com/storage/uploads/products/1615440322npwmU.71DVgBTdyLL._SL1500_.jpg",
-        "name": "ابل ايفون 12 برو ماكس - 256جيجابيت, ازرق",
+        "name": "Apple iPhone 12 Pro Max 256GB 6 GB RAM, Pacific Blue",
         "description":
-            "الحجم: ٦.٧ بوصة\r\nالدقة: 2778 × 1284 بكسل ، 458 نقطة في البوصة\r\nالتكنولوجيا: OLED\r\nالشاشة للجسم: 87.45٪\r\nسطوع الذروة: 1200 شمعة / م 2 (نيت)\r\nالميزات: دعم فيديو HDR ، طلاء مقاوم للزيوت ، زجاج مقاوم للخدش (درع سيراميك) ، مستشعر الإضاءة المحيطة ، مستشعر القرب\r\nالمعدات\r\nشريحة النظام: Apple A14 Bionic\r\nالمعالج: Hexa-core، 64-bit، 5 nm\r\nوحدة معالجة الرسومات: نعم\r\nذاكرة الوصول العشوائي: 6 جيجابايت LPDDR5\r\nالتخزين الداخلي: 128 جيجا بايت (NVMe) ، غير قابلة للتوسيع\r\nنوع الجهاز: هاتف ذكي\r\nنظام التشغيل: iOS (14.x)\r\nالبطارية\r\nالنوع: Li-Ion ، غير قابل للاستبدال بواسطة المستخدم\r\nالشحن: توصيل طاقة USB ، شحن لاسلكي Qi ، شحن لاسلكي MagSafe\r\nسرعة الشحن القصوى: لاسلكي: 15.0 واط\r\nكاميرا\r\nالخلفية: كاميرا ثلاثية\r\nالكاميرا الرئيسية: 12 ميجابكسل (OIS ، PDAF)\r\nالمواصفات: حجم الفتحة: F1.6 ؛ الطول البؤري: 26 مم ؛ حجم البكسل: 1.7 ميكرومتر\r\nكاميرا ثانية: 12 ميجا بيكسل (Telephoto، OIS، PDAF)\r\nالمواصفات: تقريب بصري: 2x؛ حجم الفتحة: F2.2 ؛ الطول البؤري: 65 مم\r\nالكاميرا الثالثة: 12 ميجابكسل (فائقة الاتساع)\r\nالمواصفات: حجم الفتحة: F2.4 ؛ الطول البؤري: 13 ملم\r\nتسجيل الفيديو: 3840 × 2160 (4K UHD) (60 إطارًا في الثانية) ، 1920 × 1080 (Full HD) (240 إطارًا في الثانية) ، 1280 × 720 (HD) (30 إطارًا في الثانية)\r\nالميزات: OIS ، HDR ، فيديو الفاصل الزمني ، ضبط تلقائي للصورة مستمر ، التقاط الصور أثناء تسجيل الفيديو ، إضاءة الفيديو\r\nالأمامية: 12 ميجابكسل (وقت الطيران (ToF) ، EIS ، HDR ، مقاطع فيديو بطيئة الحركة)\r\nالتقاط الفيديو: 3840 × 2160 (4K UHD) (60 إطارًا في الثانية)\r\nالتصميم\r\nالأبعاد: 6.33 × 3.07 × 0.29 بوصة (160.84 × 78.09 × 7.39 ملم)\r\nالوزن: 8.03 أوقية (228.0 جم)\r\nالمواد: الظهر: زجاج ؛ الإطار: ستانلس ستيل\r\nالمواد والألوان: الأزرق الباسيفيكي\r\nالمقاومة: ماء ، رذاذ ، غبار. IP68\r\nالقياسات الحيوية: فتح الوجه ثلاثي الأبعاد\r\nالمفاتيح: اليسار: التحكم في مستوى الصوت ، أخرى ؛ اليمين: مفتاح القفل / فتح القفل\r\nخلوي\r\n5G: n1، n2، n3، n5، n7، n8، n12، n20، n25، n28، n38، n40، n41، n66، n71، n77، n78، n79، n260، n261، Sub-6، mmWave\r\nLTE (FDD): النطاقات 1 (2100) ، 2 (1900) ، 3 (1800) ، 4 (AWS-1) ، 5 (850) ، 7 (2600) ، 8 (900) ، 12 (700 أ) ، 13 (700 ج) ، 14 (700 بس) ، 17 (700 ب) ، 18 (800 أقل) ، 19 (800 علوي) ، 20 (800 دد) ، 25 (1900+) ، 26 (850+) ، 28 (700) APT) ، 29 (700 د) ، 30 (2300 واط) ، 32 (1500 نطاق L) ، 66 (AWS-3) ، 71 (600)\r\nLTE (TDD): النطاقات 34 (2000) ، 38 (2600) ، 39 (1900+) ، 40 (2300) ، 41 (2600+) ، 42 (3500) ، 46 ، 48 (3600)\r\nUMTS: 850 ، 900 ، 1700/2100 ، 1900 ، 2100 ميجا هرتز\r\nسرعة البيانات: LTE-A ، HSDPA + (4G) 42.2 ميجابت / ثانية ، HSUPA 5.76 ميجابت / ثانية ، UMTS\r\nبطاقتي SIM: نعم\r\nنوع بطاقة SIM: Nano SIM ، eSIM\r\nصوت عالي الدقة: نعم\r\nVoLTE: نعم\r\nالوسائط المتعددة\r\nسماعات الرأس: لا يوجد مقبس 3.5 ملم\r\nمكبرات الصوت: سماعة أذن ، مكبر صوت\r\nالميزات: Dolby Atmos\r\nانعكاس الشاشة: مشاركة الشاشة لاسلكيًا\r\nميكروفون (مكبرات) إضافية: لإلغاء الضوضاء\r\nالاتصال والميزات\r\nالبلوتوث: 5.0\r\nشبكة Wi-Fi: 802.11 a ، b ، g ، n ، ac ، ax (Wi-Fi 6) ، ثنائي النطاق ؛ تقنية MIMO و Wi-Fi Direct و Hotspot\r\nUSB: لايتنينج\r\nالميزات: الشحن ، منفذ سماعات الرأس\r\nالموقع: GPS ، A-GPS ، Glonass ، Galileo ، BeiDou ، QZSS ، معرف الخلية ، تحديد المواقع عبر Wi-Fi\r\nالمستشعرات: مقياس تسارع ، جيروسكوب ، بوصلة ، بارومتر ، ماسح ضوئي ليدار\r\nأخرى: NFC ، UMA (اتصال Wi-Fi)\r\nمتوافقة مع المعينات السمعية: M3 ، T4\r\nالماركة: آبل\r\nاللون: أزرق\r\nنوع نظام التشغيل: iOS\r\nسعة التخزين: 128 جيجابايت\r\nعدد مداخل ال SIM: شريحة واحدة و E-SIM\r\nدقة الكاميرا الخلفية: 12 ميجابكسل\r\nنوع الهاتف المحمول: Mobile Phone\r\nتقنية الشبكة الخلوية: 5G\r\nالشركة المصنعة للشرائح: Apple\r\nحجم الشاشة (انش): 6.7 انش\r\nرقم الموديل: iPhone 12 Pro Max\r\nسعة البطارية بالمللي امبير: 3687 مللي امبير\r\nالشحن السريع: نعم\r\nذاكرة الرام: 6 جيجا بايت",
+            "DISPLAY\r\nSize: 6.7 inches\r\nResolution: 2778 x 1284 pixels, 458 PPI\r\nTechnology: OLED\r\nScreen-to-body: 87.45 %\r\nPeak brightness: 1200 cd/m2 (nit)\r\nFeatures: HDR video support, Oleophobic coating, Scratch-resistant glass (Ceramic Shield), Ambient light sensor, Proximity sensor\r\nHARDWARE\r\nSystem chip: Apple A14 Bionic\r\nProcessor: Hexa-core, 64-bit, 5 nm\r\nGPU: Yes\r\nRAM: 6GB LPDDR5\r\nInternal storage: 128GB (NVMe), not expandable\r\nDevice type: Smartphone\r\nOS: iOS (14.x)\r\nBATTERY\r\nType: Li - Ion, Not user replaceable\r\nCharging: USB Power Delivery, Qi wireless charging, MagSafe wireless charging\r\nMax charge speed: Wireless: 15.0W\r\nCAMERA\r\nRear: Triple camera\r\nMain camera: 12 MP (OIS, PDAF)\r\nSpecifications: Aperture size: F1.6; Focal length: 26 mm; Pixel size: 1.7 μm\r\nSecond camera: 12 MP (Telephoto, OIS, PDAF)\r\nSpecifications: Optical zoom: 2x; Aperture size: F2.2; Focal Length: 65 mm\r\nThird camera: 12 MP (Ultra-wide)\r\nSpecifications: Aperture size: F2.4; Focal Length: 13 mm\r\nVideo recording: 3840x2160 (4K UHD) (60 fps), 1920x1080 (Full HD) (240 fps), 1280x720 (HD) (30 fps)\r\nFeatures: OIS, HDR, Time-lapse video, Continuous autofocus, Picture-taking during video recording, Video light\r\nFront: 12 MP (Time-of-Flight (ToF), EIS, HDR, Slow-motion videos)\r\nVideo capture: 3840x2160 (4K UHD) (60 fps)\r\nDESIGN\r\nDimensions: 6.33 x 3.07 x 0.29 inches (160.84 x 78.09 x 7.39 mm)\r\nWeight: 8.03 oz (228.0 g)\r\nMaterials: Back: Glass; Frame: Stainless steel\r\nMaterials & Colors: Pacific Blue\r\nResistance: Water, Splash, Dust; IP68\r\nBiometrics: 3D Face unlock\r\nKeys: Left: Volume control, Other; Right: Lock/Unlock key\r\nCELLULAR\r\n5G: n1, n2, n3, n5, n7, n8, n12, n20, n25, n28, n38, n40, n41, n66, n71, n77, n78, n79, n260, n261, Sub-6, mmWave\r\nLTE (FDD): Bands 1(2100), 2(1900), 3(1800), 4(AWS-1), 5(850), 7(2600), 8(900), 12(700 a), 13(700 c), 14(700 PS), 17(700 b), 18(800 Lower), 19(800 Upper), 20(800 DD), 25(1900+), 26(850+), 28(700 APT), 29(700 d), 30(2300 WCS), 32(1500 L-band), 66(AWS-3), 71(600)\r\nLTE (TDD): Bands 34(2000), 38(2600), 39(1900+), 40(2300), 41(2600+), 42(3500), 46, 48(3600)\r\nUMTS: 850, 900, 1700/2100, 1900, 2100 MHz\r\nData Speed: LTE-A, HSDPA+ (4G) 42.2 Mbit/s, HSUPA 5.76 Mbit/s, UMTS\r\nDual SIM: Yes\r\nSIM type: Nano SIM, eSIM\r\nHD Voice: Yes\r\nVoLTE: Yes\r\nMULTIMEDIA\r\nHeadphones: No 3.5mm jack\r\nSpeakers: Earpiece, Loudspeaker\r\nFeatures: Dolby Atmos\r\nScreen mirroring: Wireless screen share\r\nAdditional microphone(s): for Noise cancellation\r\nCONNECTIVITY & FEATURES\r\nBluetooth: 5.0\r\nWi-Fi: 802.11 a, b, g, n, ac, ax (Wi-Fi 6), dual-band; MIMO, Wi-Fi Direct, Hotspot\r\nUSB: Lightning\r\nFeatures: Charging, Headphones port\r\nLocation: GPS, A-GPS, Glonass, Galileo, BeiDou, QZSS, Cell ID, Wi-Fi positioning\r\nSensors: Accelerometer, Gyroscope, Compass, Barometer, LiDAR scanner\r\nOther: NFC, UMA (Wi-Fi Calling)\r\nHearing aid compatible: M3, T4\r\nBrand : Apple\r\nColor : Pacific Blue\r\nOperating System Type : iOS\r\nStorage Capacity : 128GB\r\nNumber Of SIM : Single SIM & E-SIM\r\nRear Camera Resolution : 12 megapixels\r\nMobile Phone Type : Mobile Phone\r\nCellular Network Technology : 5G\r\nChipset manufacturer : Apple\r\nDisplay Size (Inch) : 6.7 inches\r\nModel Number : iPhone 12 Pro Max\r\nBattery Capacity in mAh : 3,687mAh\r\nFast Charge : Yes\r\nMemory RAM : 6 GB",
         "images": [
           "https://student.valuxapps.com/storage/uploads/products/1615440322UAwSF.81KcqNGQIsL._SL1500_.jpg",
           "https://student.valuxapps.com/storage/uploads/products/1615440322UjY4o.71DVgBTdyLL._SL1500_.jpg"
@@ -160,9 +159,9 @@ var model = {
         "discount": 0,
         "image":
             "https://student.valuxapps.com/storage/uploads/products/1615442168bVx52.item_XXL_36581132_143760083.jpeg",
-        "name": "لاب توب ابل ماك بوك برو",
+        "name": "Apple MacBook Pro",
         "description":
-            "يمكنك التمتع بتجربة الحوسبة بطريقة لم يسبق لها مثيل عندما تقوم باقتناء لاب توب ابل ماك بوك برو. يتميز هذا اللاب توب بمعالج انتل كور i5 من الجيل الثامن بتردد 2.3 جيجاهرتز والذي يضمن لك استمرار أداء النظام بكفاءة عالية. استمتع بتجربة تعدد المهام على نحو سلس وسريع باستخدام ذاكرة الوصول العشوائي بسعة 8 جيجا. يقدم لك معالج الرسومات الجرافيكية انتل ايريس بلس Intel Iris Plus Graphics صور بجودة عالية ويجعل تجربة اللعب الخاصة بك سلسة وممتعة بشكل لم يسبق له مثيل. يوفر نظام التشغيل ماك او اس macOS العديد من الميزات سهلة الاستخدام. قم بتخزين الأفلام المفضلة لديك، والتسجيلات الصوتية، والملفات الهامة الأخرى الخاصة بك بشكل مريح على الذاكرة اس اس دي SSD سعة 512 جيجا. تسمح لك شاشة العرض الرائعة حجم 13.3 انش بعرض الافلام المفضلة لديك والمحتويات الاخرى بجودة عالية. تتميز شاشة ريتينا Retina بإضاءة خلفية ال اي دي زاهية ونسبة تباين عالية تعزز تجربة المشاهدة الخاصة بك. توفر تقنية ترو تون True Tone تجربة مشاهدة طبيعية عن طريق ضبط توازن اللون الأبيض للشاشة حسب درجة حرارة لون الضوء من حولك. يتميز هذا اللاب توب بمخرجات صوتية متوازنة، وعالية الدقة، ونابضة بالحياة، ويوفر لك تجربة صوتية غامرة. تسمح لك شريحة ابل تي Apple T2 بتخزين البيانات الخاصة بك بتنسيق مشفر بمساعدة المعالج الثانوي سيكيور انكليف Secure Enclave. وعلاوة على ذلك، تعمل هذه الشريحة المتطورة على تعزيز وتشديد الحماية والامان لبياناتك بمساعدة من مستشعر التعرف على الهوية عن طريق اللمس Touch ID. يسمح لك هذا المستشعر المتقدم بإلغاء قفل الكمبيوتر المحمول باستخدام بصمات أصابعك فقط. تعمل عناصر التحكم بالشريط اللمسي Touchbar على تبسيط الأنشطة المختلفة مثل إرسال بريد إلكتروني أو تنسيق مستند معين. يمكن حمل لاب توب ابل ماك بوك برو خفيف الوزن بسهولة في حقيبة الظهر الخاصة بك. يتميز هذا اللاب توب باللون الرمادي والذي يضفي عليه مظهراً مميزاً وجميلاً.",
+            "Bring home the Apple MacBook Pro and experience computing like never before. This Apple laptop features a powerful 2.3Ghz 8th Gen-Intel Core i5 processor that makes sure the system keeps performing efficiently. Experience smooth and fast multitasking with the 8GB RAM. The Intel Iris Plus Graphics render images in high-quality and make your gaming experience a pleasing one. The macOS operating system offers various user-friendly features. Store your movies, audios, and other important files comfortably on the 512GB SSD of this device. The 13.3inch display allows you to view your favorite movies and other content in high quality. The Retina display features bright LED backlighting and a high contrast ratio that enhances your viewing experience. The True Tone technology provides a natural viewing experience by adjusting the white balance of the screen as per the color temperature of the light around. Featuring well-balanced, high-fidelity sounds, this laptop delivers an immersive audio experience. The Apple T2 chip lets you store your data in an encrypted format with the help of its Secure Enclave coprocessor. Also, it tightens the security further with the help of the Touch ID. The Touch ID only allows you to unlock your laptop using your fingerprints. The Touch Bar controls simplify various activities such as sending an email or formatting a document. This lightweight laptop can be easily carried around in your backpack. It features a space grey that gives it a distinguished and beautiful look.",
         "images": [
           "https://student.valuxapps.com/storage/uploads/products/1615442168ijV8V.item_XXL_36581132_143760083.jpeg",
           "https://student.valuxapps.com/storage/uploads/products/161544216881jxI.item_XXL_36581132_143760084.jpeg",
@@ -180,9 +179,9 @@ var model = {
         "image":
             "https://student.valuxapps.com/storage/uploads/products/1615440689wYMHV.item_XXL_36330138_142814934.jpeg",
         "name":
-            "مكبر صوت بلوتوث مقاوم للمياه ومحمول اكستريم 2 من جيه بي ال JBLXTREME2BLUAM - ازرق",
+            "JBL Xtreme 2 Portable Waterproof Bluetooth Speaker - Blue JBLXTREME2BLUAM",
         "description":
-            "مدة تشغيل الموسيقى: 15 ساعة\r\nالطاقة المخرجة (وات): 2 × 20\r\nالأبعاد: 13.6 × 28.8 × 13.2 سنتيمتر\r\nالوزن: 2.39 كيلوجرام\r\nاصدار البلوتوث: 4.2\r\nسعة البطارية: 10000 مللي امبير في الساعة\r\nمدة الشحن: 3 ساعات ونصف\r\nمدخل كابل صوت 3.5 ملم: متاح\r\nخاصية إيقاف التشغيل التلقائي: متاحة\r\nتقنية البلوتوث: متاحة\r\nيدعم تطبيق جيه بي ال كونيكت+: نعم \r\nشاحن باور بانك: متاح\r\nمكبر صوت خارجي: متاح\r\nخاصية المساعد الصوتي: متاحة\r\nمقاوم للمياه: نعم",
+            "GENERAL SPECIFICATIONS\r\nMusic playing time: 15 hours\r\nOutput power (W): 2 x 20\r\nDIMENSIONS\r\nDimensions: 13.6 x 28.8 x 13.2 centimeters\r\nWeight: 2.39 kilograms\r\nCONTROL AND CONNECTION SPECIFICATIONS\r\nBluetooth version: 4.2\r\nBATTERY\r\nBattery capacity: 10000 mAh\r\nCharging time: 3.5 hours\r\nFEATURES\r\n3.5 mm audio cable Input: Yes\r\nAuto power off: Yes\r\nBluetooth: Yes\r\nJBL Connect+: Yes\r\nPower bank: Yes\r\nSpeakerphone: Yes\r\nVoice Assistant: Yes\r\nWaterproof: Yes",
         "images": [
           "https://student.valuxapps.com/storage/uploads/products/1615440689Oojt6.item_XXL_36330138_142814947.jpeg",
           "https://student.valuxapps.com/storage/uploads/products/16154406895ynKU.item_XXL_36330138_142814944.jpeg",
@@ -199,10 +198,9 @@ var model = {
         "discount": 8,
         "image":
             "https://student.valuxapps.com/storage/uploads/products/1615441020ydvqD.item_XXL_51889566_32a329591e022.jpeg",
-        "name":
-            "تليفزيون سمارت 65 بوصة 4K الترا اتش دي منحني من سامسونج UA65RU7300RXUM",
+        "name": "Samsung 65 Inch Smart TV 4K Ultra HD Curved - UA65RU7300RXUM",
         "description":
-            "العلامة التجارية: سامسونج\r\nاللون: اسود\r\nالموديل: UA65RU7300\r\nالنوع: منحني\r\nالحجم: 65 بوصة\r\nمنفذ اتش دي ام اي: 3\r\nمنفذ يو اس بي: 2\r\nتليفزيون سمارت: نعم\r\nجهاز تحكم عن بعد واحد: نعم\r\nالدقة: 3,840 × 2,160\r\nالوزن: 25.0 كجم\r\nالابعاد (عرض × طول × عمق): 145.27 × 83.81 × 12.09 سم\r\nتقنية الذكاء الاصطناعي المحسّنة للصورة (AI Upscale): لا يوجد\r\nتقنية العرض الذكي (سمارت فيو): نعم",
+            "Brand: Samsung\r\nColor: black\r\nModel: UA65RU7300\r\nType: Curve\r\nSize: 65 inch\r\nHDMI: 3\r\nUSB: 2\r\nSmart: Yes\r\nOne Remote: Yes\r\nResolution: 3,840 x 2,160\r\nWeight: 25.0 kg\r\nDimensions (WxHxD): 145.27 x 83.81 x 12.09 cm\r\nAI Upscale: N/A\r\nSmart View: Yes",
         "images": [
           "https://student.valuxapps.com/storage/uploads/products/1615441020SnVry.item_XXL_51889566_32a329591e022.jpeg",
           "https://student.valuxapps.com/storage/uploads/products/1615441020mgFw2.item_XXL_51889566_8dbac7d5b2039.jpeg"
@@ -218,9 +216,9 @@ var model = {
         "image":
             "https://student.valuxapps.com/storage/uploads/products/1615450256e0bZk.item_XXL_7582156_7501823.jpeg",
         "name":
-            "نيكون FX-format D750 - 24.3 ميجابيكسيل,كاميرا اس ال ار , عدسه 24-120 ملم, اسود",
+            "Nikon FX-format D750 - 24.3 MP, SLR Camera 24-120mm Lens, Black",
         "description":
-            "كاميرا نيكون FX-format D750 تأتي محملة بخصائص متطورة تمنحك التحكم الكامل لتتمكن من التقاط الصور الواضحة للحظات حياتك. هذه الكاميرا صغيرة الحجم تأتي مع عدسة NIKKOR 24 - 120 ملم المثالية لالتقاط صور شخصية و صور للمناظر الطبيعية و صور حفلات الزفاف. على الرغم من ان هذا الجهاز صغير وخفيف الوزن لكنه يمنحك اداء ممتاز. استشعار CMOS بعدسة 24.3 ميغا بكسل و محرك EXPEED 4 يمنحانك القدرة على التقاط صور و مقاطع فيديو ممتازة حتى في ظروف الاضاءة المحيطة الخافتة. لهذه الكاميرا السوداء قائمة تصوير افلام مع إعدادات تحكم لتتمكن من تسجيل افلام 1080/60بكسل بوضوح فل اتش دي مع الحد الادنى من التموّج و التشويش. و تضم كاميرا نيكون FX-format D750 شاشة تي اف تي ال سي دي حجمها 3.2 انش و تعمل بدقة 1229K نقطة، لتتمكن من التقاط صور من زوايا مختلفة او اعادة عرض ما قمت بتصويره. واي فاي المدمج بهذه الكاميرا يمكنك من مشاركة الصور التي تلتقطها و الفيديوهات مع العالم. كل هذه الخصائص و اكثر تجعل كاميرا نيكون FX-format D750 مثالية للمصورين المحترفين و الشبه محترفين.",
+            "The Nikon FX Format D750 SLR Camera comes loaded with an array of advanced features that provide total control, enabling you to capture life’s fleeting moments in their purest form. The compact camera comes with 24 to 120mm NIKKOR lens that is perfect for capturing portraits, landscapes, and weddings. Even though this imaging device is small and lightweight, it does not compromise on performance. The device’s impressive 24.3MP CMOS image sensor and EXPEED 4 engine provide you with the ability to shoot stellar photos and videos, even in low light conditions. The sleek black camera’s movie shooting menu with preset control settings make it possible to record 1080/60p Full HD movies with reduced moiré and minimal jaggies. The SLR camera’s 3.2inch tilting TFT LCD monitor has a resolution of approximately 1229K dots. It makes it convenient for you to compose shots from tricky angles or playback the captured footage. The device’s built in WiFi simplifies on the spot sharing of your images and videos with the world. The inclusion of all these and several other sought after features make the Nikon D750 perfect for pro and semi pro photographers alike.",
         "images": [
           "https://student.valuxapps.com/storage/uploads/products/1615450256RlWor.item_XXL_7582156_7501823.jpeg",
           "https://student.valuxapps.com/storage/uploads/products/1615450256gJZZG.item_XXL_7582156_7501825.jpeg",
@@ -239,10 +237,9 @@ var model = {
         "discount": 0,
         "image":
             "https://student.valuxapps.com/storage/uploads/products/1615451352LMOAF.item_XXL_23705724_34135503.jpeg",
-        "name":
-            "هارد اس اس دي داخلي 240 جيجابايت A400 ساتا 3 من كينجستون - 2.5 بوصة - SA400S37/240G",
+        "name": "Kingston A400 Internal SSD 2.5\" 240GB SATA 3 - SA400S37/240G",
         "description":
-            "العلامة التجارية : كينغستون\r\nسعة التخزين : 240 جيجابايت\r\nأنظمة التشغيل المتوافقة : ويندوز\r\nنوعية الوصل : ساتا\r\nصنف قرص التخزين : اس اس دي\r\nطبيعة قرص التخرين : داخلي لابتوب",
+            "Brand : kingston\r\nStorage Capacity : 240 GB\r\nCompatible operating systems : Windows\r\nInterface Type : SATA\r\nDrive Type : SSD\r\nStorage Device Use : Internal Laptop\r\nModel Number : SA400S37/240G",
         "images": [
           "https://student.valuxapps.com/storage/uploads/products/16154513529ml4b.item_XXL_23705724_34135503.jpeg",
           "https://student.valuxapps.com/storage/uploads/products/1615451352LKVSq.item_XXL_23705724_34135507.jpeg"
@@ -257,9 +254,9 @@ var model = {
         "discount": 0,
         "image":
             "https://student.valuxapps.com/storage/uploads/products/161545152160GOl.item_XXL_39275650_152762070.jpeg",
-        "name": "أداة تمرين حديد كيتل بيل من ستارك، 24 كجم",
+        "name": "Stark Iron Kettlebell, 24 KG",
         "description":
-            "العلامة التجارية: ستارك\r\nاللون: اسود\r\nالوزن: 24 كغ\r\nالفئة المستهدفة: للجنسين",
+            "Brand: Stark\r\nColor: Black\r\nWeight: 24 Kg\r\nTargeted Group: Unisex",
         "images": [
           "https://student.valuxapps.com/storage/uploads/products/16154515218VdQx.item_XXL_39275650_152762070.jpeg",
           "https://student.valuxapps.com/storage/uploads/products/1615451521kM8Ij.item_XXL_39275650_152762102.jpeg"
@@ -274,9 +271,10 @@ var model = {
         "discount": 0,
         "image":
             "https://student.valuxapps.com/storage/uploads/products/1638734223uyATp.1.jpg",
-        "name": "كمامة لحماية الوجه، 50 قطعة - ازرق فاتح بأستك و دعامة",
+        "name":
+            "Face Protection Mask, 50 Count - Light Blue with Elastic and Braces",
         "description":
-            "العلامة التجارية : اخرى\r\nهل يتطلب هذا المنتج بطارية او يحتوي بطارية : لا\r\nهل هذا المنتج خطير أو يحتوي على مواد خطرة، سامة أو نفايات خاضعة لأنظمة تتعلق بالنقل، التخزين وأو التخلص منها؟ : لا\r\nالنوع : اقنعة حماية",
+            "Brand : Other\r\nAre batteries needed to power the product or is this product a battery : 0\r\nIs this a Dangerous Good or a Hazardous Material, Substance or Waste that is regulated for transportation, storage, and/or disposal? : 0\r\nType : Protection Masks",
         "images": [
           "https://student.valuxapps.com/storage/uploads/products/1638734223zeTvx.1.jpg",
           "https://student.valuxapps.com/storage/uploads/products/1638734223mvH7B.2.jpg"
@@ -292,9 +290,9 @@ var model = {
         "image":
             "https://student.valuxapps.com/storage/uploads/products/1638734961565J3.11.jpg",
         "name":
-            "موبايل شاومي ريدمي 10 بشريحتي اتصال - 6.53 بوصة فل اتش دي ، 64 جيجا ، 4 جيجا رام ، شبكة الجيل الرابع ال تي اي - رمادي كربوني",
+            "Xiaomi Redmi 10 Dual SIM Mobile- 6.53 Inch FHD , 64GB, 4GB RAM, 4G LTE - Carbon Gray",
         "description":
-            "اسم الطراز\tXiaomi Redmi 10\r\nالناقل اللاسلكي\tجميع الناقلين\r\nالعلامة التجارية\tXiaomi\r\nعامل الشكل\tFoldable Screen\r\nسعة تخزين الذاكرة\t4 غيغابايت\r\nنظام التشغيل\tAndroid 11.0\r\nاللون\tرمادي كربون\r\nالتكنولوجيا الخلوية\tLTE\r\nعدد فتحات بطاقة SIM\tبشريحتين\r\nالسنة\t2021\r\n--------------------\r\nكاميرا رباعية مزودة بتقنية الذكاء الاصطناعي AI، وحدة معالجة مركزية للألعاب\r\nشاشة 90 هرتز FHD+\r\nبطارية 5000 ميلي أمبير في الساعة\r\nشحن سريع\r\nالوزن: 181 جرام\r\nمعالج Helio G88 ثماني النواة\r\nالكاميرا الخلفية: 50 ميجابيكسل\r\nالكاميرا الأمامية: 8 ميجابيكسل\r\nالأبعاد: 161.95 ملم × 75.53 ملم × 8.92 ملم\r\nعملية تصنيع 12 نانومتر",
+            "Model name\tXiaomi Redmi 10\r\nWireless carrier\tUnlocked for All Carriers\r\nBrand\tXiaomi\r\nForm factor\tFoldable Screen\r\nMemory storage capacity\t4 GB\r\nOS\tAndroid 11.0\r\nColour\tCarbon Gray\r\nCellular technology\tLTE\r\nSIM card slot count\tDual SIM\r\nModel year\t2021\r\n------------\r\nAbout this item\r\nAI quad camera | 90Hz FHD+ display , 5000mAh battery , Gaming CPU , fast charging\r\nWeight: 181g\r\nHelio G88 processor,Octa-Core ,12nm manufacturing process Dimensions:161.95mm x 75.53mm x 8.92mm\r\nMain camera : 50MP\r\nFront camera : 8MP",
         "images": [
           "https://student.valuxapps.com/storage/uploads/products/163873496133DmC.11.jpg",
           "https://student.valuxapps.com/storage/uploads/products/1638734961lq9NM.12.jpg",
@@ -314,9 +312,9 @@ var model = {
         "discount": 0,
         "image":
             "https://student.valuxapps.com/storage/uploads/products/1638737146iLO2c.11.jpg",
-        "name": "حذاء رياضي للتمرين شبكي للنساء فليكس اسينشيال من نايكي - ابيض",
+        "name": "Nike Flex Essential Mesh Training Shoes For Women - White",
         "description":
-            "يتميز حذاء التمرين فليكس اسينشيال من نايكي للنساء بجزء علوي خفيف الوزن مصنوع من نسيج شبكي مزود بمسامات للتهوية مع نعل داعم مصمم بشكل مميز لتوفير مرونة الحركة في أي اتجاه. فهو حذاء مثالي للارتداء أثناء أداء التمارين الرياضية اليومية في أي مكان.\r\nجزء علوي من نسيج شبكي صناعي خفيف لتوفير التهوية للقدمين.\r\nنعل أوسط مبطن من الفوم خفيف الوزن لتوفير الراحة عند الارتداء .\r\nأجزاء متينة مصنوعة من المطاط لسهولة الحركة.\r\nفتحات مرنة بالنعل الخارجي لسهولة حركة القدم.\r\nالموديل: 924344-100",
+            "Women's Nike Flex Essential Training Shoes pairs a lightweight, breathable upper with a supportive platform designed for flexibility and traction in every direction. Ideal for light workouts and all-day wear, this shoe is flexible to whatever you have planned.\r\n\r\nMesh synthetic construction provides breathable containment\r\nLightweight foam midsole for comfortable cushioning\r\nSections of durable rubber tread for excellent traction\r\nDeep flex grooves allow your foot to move naturally\r\nStyle: 924344-100",
         "images": [
           "https://student.valuxapps.com/storage/uploads/products/1638737146HIHWT.11.jpg",
           "https://student.valuxapps.com/storage/uploads/products/1638737146A41I6.12.jpg",
@@ -335,10 +333,9 @@ var model = {
         "discount": 0,
         "image":
             "https://student.valuxapps.com/storage/uploads/products/1638737571de5EF.21.jpg",
-        "name":
-            "تي شيرت رجالي من Nike NSW Icon Futura, أسود (أسود/أبيض010)، مقاس متوسط",
+        "name": "Nike Men's NSW Tee Icon Futura, Black(Black/White010), Medium",
         "description":
-            "تي شيرت رياضي للرجال من نايك مصنوع من القطن المريح\r\nتي شيرت رياضي من نايك يمنحك الراحة مع قماش جورسيه قطني ناعم وشعار كلاسيكي على الصدر\r\nقماش جورسيه قطني ناعم ومريح",
+            "Nike sportswear men's T-Shirt classic cotton comfort\r\nThe nike sportswear t-Shirt sets you up with soft cotton jersey and a classic logo on the chest\r\nCotton jersey fabric is soft and comfortable",
         "images": [
           "https://student.valuxapps.com/storage/uploads/products/1638737572UAVEg.21.jpg",
           "https://student.valuxapps.com/storage/uploads/products/1638737572O9uYg.22.jpg"
@@ -353,9 +350,9 @@ var model = {
         "discount": 28,
         "image":
             "https://student.valuxapps.com/storage/uploads/products/1638734575kfKn8.21.jpg",
-        "name": "كمامة طبية بحلقات اذن ناعمة ومرنة من ايفوني، 50 قطعة",
+        "name": "Evony Surgical Mask with Soft Elastic Ears, 50 Pieces",
         "description":
-            "سهلة الارتداء\r\nمناسبة للاستعمال مرة واحدة\r\nصُنعت في مصر",
+            "easy to wear\r\nSuitable for single use\r\nMade in Egypt\r\nASIN: B09475K6NQ",
         "images": [
           "https://student.valuxapps.com/storage/uploads/products/1638734575Qcgiu.21.jpg",
           "https://student.valuxapps.com/storage/uploads/products/1638734575rm6Mx.22.jpg",
@@ -372,9 +369,9 @@ var model = {
         "discount": 32,
         "image":
             "https://student.valuxapps.com/storage/uploads/products/1638735246ToPmP.21.jpg",
-        "name": "سوار شاومي مي الذكي 5 - اسود",
+        "name": "Xiaomi Mi Smart Band 5 - Black",
         "description":
-            "العلامة التجارية\tشاومي\r\nمعيار الاتصالات اللاسلكية\tبلوتوث\r\nاللون\tأسود\r\nالأجهزة المتوافقة\tمتعدد\r\nمدخل واجهة المستخدم\tشاشة لمس\r\nحجم الشاشة\t3 بوصة\r\nعرض الشريط\t15 مليمترات\r\nالناقل اللاسلكي\t3\r\n---------------\r\nحول هذه السلعة\r\nتصميم خفيف الوزن\r\nمصنوع من مواد عالية الجودة\r\nمقاوم للماء",
+            "Brand\tXiaomi\r\nWireless communication standard\tBluetooth\r\nColour\tBlack\r\nCompatible devices\tMulti\r\nHuman interface input\tTouchscreen\r\nScreen size\t3 Inches\r\nBandwidth\t15 Millimeters\r\nWireless carrier\t3\r\n---------------\r\nAbout this item\r\nLightweight design\r\nMade of high quality materials\r\nWater resistant",
         "images": [
           "https://student.valuxapps.com/storage/uploads/products/163873524655oou.21.jpg",
           "https://student.valuxapps.com/storage/uploads/products/1638735246umUmo.22.jpg",
@@ -390,9 +387,9 @@ var model = {
         "discount": 40,
         "image":
             "https://student.valuxapps.com/storage/uploads/products/16387377980g2kx.11.jpg",
-        "name": "سماعات العاب لاسلكية لبلاي ستيشن 5 Pulse 3D من سوني",
+        "name": "Sony Pulse 3D Wireless Gaming Headset for PlayStation 5",
         "description":
-            "العلامة التجارية\tسوني\r\nاللون\tابيض واسود\r\nتقنية الاتصال\tWireless\r\nوزن السلعة\t1.5 رطل\r\nالأجهزة المتوافقة\tمتعدد\r\nتكنولوجيا الاتصالات اللاسلكية\tلا سلكي\r\n---------------\r\nحول هذه السلعة\r\nبنيت لجيل جديد\r\nضبط دقيق للصوت ثلاثي الأبعاد على وحدات تحكم PS5 1.\r\nاستمتع بألعاب مريحة مع وسادات أذن محسّنة وحزام عقال.\r\nالعب بأناقة مع تصميم أنيق يكمل وحدة تحكم PS5.\r\nمصممة للاعبين. الدردشة مع الأصدقاء من خلال ميكروفونات إلغاء الضوضاء المخفية 2.\r\nاضبط إعدادات الصوت والدردشة بسرعة باستخدام عناصر تحكم يسهل الوصول إليها.",
+            "Brand\tSony\r\nColour\tWhite & Black\r\nConnectivity technology\tWireless\r\nItem weight\t1.5 Pounds\r\nCompatible Devices\tMulti\r\n---------------------\r\nAbout this item\r\nBuilt for a new generation\r\nFine-tuned for 3D Audio on PS5 consoles1.\r\nEnjoy comfortable gaming with refined earpads and headband strap.\r\nPlay in style with a sleek design that complements the PS5 console.\r\nDesigned for gamers; Chat with friends through the hidden noise-cancelling microphones2.\r\nQuickly adjust audio and chat settings with easy-access controls.",
         "images": [
           "https://student.valuxapps.com/storage/uploads/products/1638737798SfPxq.11.jpg",
           "https://student.valuxapps.com/storage/uploads/products/1638737798ZJ4C4.12.jpg",
@@ -408,9 +405,9 @@ var model = {
         "discount": 31,
         "image":
             "https://student.valuxapps.com/storage/uploads/products/1644372386y0SzM.4.jpg",
-        "name": "بلوفر شتوي بياقة عالية - جملي",
+        "name": "Winter High Collar Pullover - Camel",
         "description":
-            "نسعي لتقديم منتجات تجمع بين الموضة والحياة العملية حيث يتم تصنيع منتجاتنا من افضل الخامات والتقنيات المبتكرة في مجال الأقمشة والالوان والتصميمات",
+            "We strive to provide products that combine fashion and practical life, as our products are manufactured from the best materials and innovative technologies in the field of fabrics, colors and designs",
         "images": [
           "https://student.valuxapps.com/storage/uploads/products/1644372386aaZFh.5.jpg"
         ],
@@ -425,9 +422,9 @@ var model = {
         "image":
             "https://student.valuxapps.com/storage/uploads/products/1638738160hkG50.1.jpg",
         "name":
-            "حلقة اضاءة دائرية للبث المباشر والتصوير الاحترافي M-33 مع استدارة 360 درجة 33 سم مع حامل موبايل وحامل ثلاثي 2.1 متر - ابيض و اسود",
+            "M-33 Live Stream 360 Degree Rotated LED Ring Light 33 cm With Mobile Phone Holder And 2.1 Meter Stand - Black & White",
         "description":
-            "العلامة التجارية:اخرى\r\nاللون:ابيض اسود\r\nرقم الموديل:M33\r\nالمقاس:33سم\r\nلون الإضاءة:3 الوان من الإضاءة (ابيض,اصفر,دافئ)\r\nمصدر الطاقة:توصيل USB\r\nتشمل:حلقة أضاءة LED ,حامل موبيل , 2.1 متر حامل ثلاثي\r\nاستدارة 360 درجة\r\nمتعدد الاستخدامات\r\nمناسب لصور السيلفي والمصورين والمدونين وفناني الماكياج وما إلى ذلك",
+            "Brand:Other\r\nColor:Black White\r\nModel Number:M33\r\nSize:33cm\r\nlight Mode:3 Mode of Light (White,Yellow,Warm)\r\nPlug Type:USB Power\r\nPackage Includes:LED Ring Light ,Mobile Phone Holder , 2.1 Meter Stand\r\n360 Degree Rotated\r\nMulti Porpuse Using\r\nSiutable For Selfie Photos, Photographers, Bloggers, Makeup Artists, etc",
         "images": [
           "https://student.valuxapps.com/storage/uploads/products/1638738160E3xDG.1.jpg",
           "https://student.valuxapps.com/storage/uploads/products/1638738160JmvbS.2.jpg",
@@ -449,9 +446,9 @@ var model = {
         "discount": 0,
         "image":
             "https://student.valuxapps.com/storage/uploads/products/1638738391RrZ5V.21.jpg",
-        "name": "ضوء ليلي من شاومي مع مستشعر حركي وقاعدة مغناطسية - ابيض",
+        "name": "Xiaomi Mi Motion Activated Night Light 2 - White",
         "description":
-            "اللون\tاصفر\r\nوزن السلعة\t100 غرامات\r\nالعلامة التجارية\tشاومى\r\nالتجميع مطلوب\tلا\r\nعدد مصادر الضوء\t1\r\nعدد القطع\t1\r\n--------------------------------\r\nحول هذه السلعة\r\nنوع الإنارة : اضواء ليلية\r\nالعلامة التجارية : شاومى\r\n360˚ ضوء ستريو دوار\r\nحساس بعرض 120 درجة\r\nحساس للضوء + جهاز استشعار مزدوج لجسم الإنسان\r\nكشف الحركة البشرية\r\n2- مستويات السطوع\r\n2800K ضوء أصفر دافئ\r\nهيكل مغناطيسي",
+            "Colour\tYellow\r\nItem weight\t100 Grams\r\nBrand\tXiaomi\r\nAssembly required\tNo\r\nNumber of light sources\t1\r\nNumber of pieces\t1\r\n--------------\r\nAbout this item\r\nLight Type : Night Lights\r\nBrand : Xiaomi\r\n360˚ rotating stereo light\r\n120-degree sensor\r\nLight sensitive + dual sensor for the human body\r\nHuman motion detection\r\n2- Brightness levels",
         "images": [
           "https://student.valuxapps.com/storage/uploads/products/163873839146spo.21.jpg",
           "https://student.valuxapps.com/storage/uploads/products/1638738391UiO3W.22.jpg",
@@ -470,9 +467,9 @@ var model = {
         "discount": 50,
         "image":
             "https://student.valuxapps.com/storage/uploads/products/1638737964KFEyZ.21.jpg",
-        "name": "سماعات رأس لاسلكية من سوني WI-C200 - اسود",
+        "name": "Sony WI-C200 Wireless Headphones - Black",
         "description":
-            "العلامة التجارية\tسوني\r\nاللون\tاسود\r\nتقنية الاتصال\tWireless\r\nوزن السلعة\t0.01 كيلوجرام\r\nالأجهزة المتوافقة\tكافة الاجهزة\r\nتكنولوجيا الاتصالات اللاسلكية\tلاسلكي\r\nالنمط\tClosed-back\r\n-----------\r\nحول هذه السلعة\r\nمتوافقة مع اجهزة متعددة وسهلة الاستخدام.\r\nصوت نقي ومتوازن\r\nسماعات مصممة ومختبرة لضمان الاستخدام الآمن.",
+            "Brand\tSony\r\nColour\tBlack\r\nConnectivity technology\tWireless\r\nItem weight\t0.01 Kilograms\r\nCompatible devices\tAll\r\nWireless communication technologies\tBluetooth\r\nStyle\tClosed-back\r\n-----------------\r\nAbout this item\r\nCompatible with multiple devices and easy to use.\r\nBalanced Pure Sound\r\nDesigned and tested for using safely",
         "images": [
           "https://student.valuxapps.com/storage/uploads/products/1638737964rr3wr.21.jpg",
           "https://student.valuxapps.com/storage/uploads/products/1638737964AyYrU.22.jpg",
@@ -492,9 +489,9 @@ var model = {
         "discount": 53,
         "image":
             "https://student.valuxapps.com/storage/uploads/products/1644375298PFm8i.14.jpg",
-        "name": "قميص بأكمام طويلة وجيب برقعة - زيتوني غامق",
+        "name": "Front Patch Pocket Long Sleeve Shirt - Dark Olive",
         "description":
-            "- يرتدي موديل مقاس L \r\n- مادة القطن\r\n- تناسب منتظم\r\n- اكمام طويلة",
+            "Our model wears a size L\r\ncotton material\r\nRegular fit\r\nlong sleeves",
         "images": [
           "https://student.valuxapps.com/storage/uploads/products/1644375298DjMDB.14.jpg",
           "https://student.valuxapps.com/storage/uploads/products/1644375298UaXrd.15.jpg",
@@ -511,9 +508,9 @@ var model = {
         "discount": 42,
         "image":
             "https://student.valuxapps.com/storage/uploads/products/1644374518pTaSB.10.jpg",
-        "name": "جاكيت رجالي بياقة كولاج بلون موحد",
+        "name": "Fashion Solid Color Collage Collar Men Jacket",
         "description":
-            "- فئة المنتج: جاكيت\r\n- النمط: كاجوال\r\n- الطول: بأكمام طويلة\r\n- مادة البطانة: بوليستر (PET)\r\n- السماكة: مقطع رقيق\r\n- نوع الإصدار: جسم مناسب\r\n- الحجم: M ، L ، XL ، XXL ، XXXL ، XXXXL ، 5XL\r\n- الألوان: أزرق بني ، أزرق رمادي\r\n- الطول: القسم العام (50 سم - 65 سم)",
+            "- Product Category: Jackets\r\n- Style: Casual sports\r\n- Length: long-sleeved\r\n- Lining Material: Polyester (PET)\r\n- Thickness: Thin section\r\n- type version: fit body\r\n- Size: M, L, XL, XXL, XXXL, XXXXL, 5XL\r\n- Colors: brown blue, gray blue\r\n- Length: general section (50cm - 65cm)",
         "images": [
           "https://student.valuxapps.com/storage/uploads/products/1644374518j1Fb5.10.jpg",
           "https://student.valuxapps.com/storage/uploads/products/1644374518J6Ymx.11.jpg",
@@ -525,6 +522,6 @@ var model = {
       }
     ],
     "ad":
-        "https://student.valuxapps.com/storage/uploads/banners/1689106762vIpcq.photo_2023-07-11_23-07-38.png"
+        "https://student.valuxapps.com/storage/uploads/banners/1689106932hsRxm.photo_2023-07-11_23-07-53.png"
   }
 };

@@ -8,7 +8,7 @@ class dioHelper {
     dio = Dio(
       BaseOptions(
         baseUrl: baseURL,
-        receiveDataWhenStatusError: true,
+        // receiveDataWhenStatusError: true,
       ),
     );
     print("init");
@@ -17,7 +17,7 @@ class dioHelper {
   static Future<Response<dynamic>> getData({
     required String url,
     Map<String, dynamic>? queryParameter,
-    String lang = 'eng',
+    String lang = 'en',
     String? token = '',
   }) async {
     //  dio!.options.headers = {
@@ -25,15 +25,23 @@ class dioHelper {
     //   'lang': lang,
     //   'Authorization': token,
     // };
-    return await dio!.get( 
+    print(dio?.request(url));
+    print(token);
+    return await dio!.get(
       // 'https://student.valuxapps.com/api/${url}',
       url,
-      options:Options(
+      options: Options(
         headers: {
-      'Content-Type': 'application/json',
-      'lang': lang,
-      'Authorization': token,
-    },
+          // 'Host': '<calculated when request is sent>',
+          // 'Postman-Token': '<calculated when request is sent>',
+          // 'User-Agent': '<PostmanRuntime/7.36.0>',
+          // 'Accept': '<*/*>',
+          // 'Accept-Encoding': '<gzip, deflate, br>',
+          // 'Connection': '<keep-alive>',
+          'lang': lang,
+          'Content-Type': 'application/json',
+          'Authorization': token,
+        },
       ),
     );
   }
@@ -52,12 +60,12 @@ class dioHelper {
     return await dio!.post(
       url,
       data: data,
-      options:Options(
-        headers:  {
-      'Content-Type': 'application/json',
-      'lang': lang,
-      'Authorization': token,
-    },
+      options: Options(
+        headers: {
+          'Content-Type': 'application/json',
+          'lang': lang,
+          'Authorization': token,
+        },
       ),
     );
   }

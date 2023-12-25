@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/models/homeModel.dart';
 import 'package:shop_app/modules/shopScreens/search/search.dart';
 import 'package:shop_app/shared/cubit/shopCubit/shopCubit.dart';
 import 'package:shop_app/shared/cubit/shopCubit/shopStates.dart';
@@ -9,6 +10,7 @@ class shopLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print( homeModel.fromJson(model).status );
     return BlocConsumer<shopCubit, shopStates>(
       listener: (context, state) {},
       builder: (context, state) {

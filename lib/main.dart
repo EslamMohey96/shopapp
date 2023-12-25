@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/layout/shopLayout.dart';
 import 'package:shop_app/modules/onBoarding/onBoarding.dart';
 import 'package:shop_app/modules/userScreens/loginScreen/logInScreen.dart';
 import 'package:shop_app/modules/userScreens/profile/profile.dart';
@@ -79,7 +80,8 @@ class MyApp extends StatelessWidget {
             themeMode: onBoardingCubit.get(context).darkMode
                 ? ThemeMode.dark
                 : ThemeMode.light,
-            home: startPage,
+            home:
+             startPage,
           );
         },
       ),
