@@ -3,6 +3,7 @@ import 'package:shop_app/models/boardingModel.dart';
 import 'package:shop_app/modules/userScreens/loginScreen/logInScreen.dart';
 import 'package:shop_app/shared/components/components.dart';
 import 'package:shop_app/shared/cubit/onBoardingCubit/onBoardingCubit.dart';
+import 'package:shop_app/shared/network/local/cacheHelper.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class onBoarding extends StatelessWidget {
@@ -41,13 +42,18 @@ class onBoarding extends StatelessWidget {
               ),
             ),
             onPressed: () {
-              Navigator.pushAndRemoveUntil(
+              cacheHelper
+                .setData(
+              key: 'onBoarding',
+              value: true,
+            ).then((value) => Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
                   builder: (context) => logInScreen(),
                 ),
                 (route) => false,
-              );
+              ));
+              
             },
             child: Text(
               "Skip",

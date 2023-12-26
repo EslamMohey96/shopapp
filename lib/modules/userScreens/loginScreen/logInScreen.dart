@@ -34,6 +34,8 @@ class logInScreen extends StatelessWidget {
               Token = cacheHelper.getData(
                 key: 'token',
               );
+              myLoginCubit.get(context).emailController.text = '';
+              myLoginCubit.get(context).passwordController.text = '';
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => shopLayout()),
@@ -85,7 +87,7 @@ class logInScreen extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       const Text(
-                                        'Electronic',
+                                        'Dynamo',
                                         style: TextStyle(
                                           color: Colors.red,
                                           fontSize: 40,
@@ -94,7 +96,7 @@ class logInScreen extends StatelessWidget {
                                       ),
                                       sizeBoxW(10),
                                       const Text(
-                                        'Markit',
+                                        'Store',
                                         style: TextStyle(
                                           fontSize: 40,
                                           fontWeight: FontWeight.bold,
@@ -178,7 +180,6 @@ class logInScreen extends StatelessWidget {
                                             );
                                           }
 
-                                          
                                           // cubit.valid(
                                           //     user: cubit.emailController.text,
                                           //     pass: cubit.passwordController.text);

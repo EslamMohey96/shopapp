@@ -6,7 +6,7 @@ import 'package:shop_app/shared/components/components.dart';
 import 'package:shop_app/shared/cubit/shopCubit/shopCubit.dart';
 import 'package:shop_app/shared/cubit/shopCubit/shopStates.dart';
 
-class products extends StatelessWidget {
+class productsScreen extends StatelessWidget {
   late shopCubit cubit;
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class products extends StatelessWidget {
       builder: (context, state) {
         cubit = shopCubit.get(context);
         return Scaffold(
-          body: state is homeLoadingState
+          body: cubit.homeModelDone == 0
               ? Center(
                   child: CircularProgressIndicator(),
                 )
@@ -29,10 +29,10 @@ class products extends StatelessWidget {
   }
 
   Widget productsBuilder() {
-    var dataModel = homeModel.fromJson(model);
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CarouselSlider(
             items: cubit.home_model.data.banners
@@ -56,6 +56,82 @@ class products extends StatelessWidget {
                 autoPlayCurve: Curves.fastOutSlowIn,
                 scrollDirection: Axis.horizontal),
           ),
+          Container(
+            padding: EdgeInsets.only(
+              top: 20,
+              right: 10,
+              left: 10,
+            ),
+            width: double.infinity,
+            color: Colors.white,
+            child: Text(
+              'Categories',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+              ),
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            padding: EdgeInsets.only(
+              top: 5,
+              right: 10,
+              left: 10,
+            ),
+            color: Colors.white,
+            height: 100,
+            child: ListView.separated(
+              shrinkWrap: true,
+              physics: BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) => Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  Image(
+                    image: NetworkImage(
+                      '${cubit.categories_model.data.dataM[index].image}',
+                    ),
+                    width: 100,
+                    height: 100,
+                    fit: BoxFit.cover,
+                  ),
+                  Container(
+                    color: Colors.black.withOpacity(0.8),
+                    width: 100,
+                    child: Text(
+                      '${cubit.categories_model.data.dataM[index].name}',
+                      textAlign: TextAlign.center,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              separatorBuilder: (context, index) => sizeBoxW(5),
+              itemCount: cubit.categories_model.data.dataM.length,
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(
+              top: 40,
+              right: 10,
+              left: 10,
+            ),
+            width: double.infinity,
+            color: Colors.white,
+            child: Text(
+              'New Products',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+              ),
+            ),
+          ),
           sizeBoxH(2),
           Container(
             child: GridView.count(
@@ -77,26 +153,25 @@ class products extends StatelessWidget {
                         children: [
                           Image(
                             image: NetworkImage(
-                                dataModel.data.products[index].image),
+                                cubit.home_model.data.products[index].image),
                             width: double.infinity,
                             height: 200,
                           ),
-                          if(cubit.home_model.data.products[index].discount!=0) 
-                          Container(
-                            color: Colors.red,
-                            child: Text(
-                              "Discount ${cubit.home_model.data.products[index].discount}%",
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white
+                          if (cubit.home_model.data.products[index].discount !=
+                              0)
+                            Container(
+                              color: Colors.red,
+                              child: Text(
+                                "Discount ${cubit.home_model.data.products[index].discount}%",
+                                style: TextStyle(
+                                    fontSize: 12, color: Colors.white),
                               ),
-
-                            ),
-                          )
+                            )
                         ],
                       ),
                       sizeBoxH(7),
-                      Center(
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Text(
                           '${cubit.home_model.data.products[index].name}',
                           maxLines: 2,
@@ -125,12 +200,18 @@ class products extends StatelessWidget {
                                 decoration: TextDecoration.lineThrough,
                               ),
                             ),
-                            Spacer(),
-                            IconButton(
-                            onPressed: (){
-
-                            },
-                            icon: Icon(Icons.favorite_border))
+                          Spacer(),
+                          IconButton(
+                              color: cubit.favList[
+                                      cubit.home_model.data.products[index].id]!
+                                  ? Colors.red
+                                  : Colors.grey,
+                              onPressed: () {
+                                cubit.changeFavoritesData(
+                                    cubit.home_model.data.products[index].id);
+                                cubit.IsFavoritesData();
+                              },
+                              icon: Icon(Icons.favorite))
                         ],
                       ),
                     ],

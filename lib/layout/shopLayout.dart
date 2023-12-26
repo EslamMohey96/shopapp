@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/models/homeModel.dart';
-import 'package:shop_app/modules/shopScreens/search/search.dart';
+import 'package:shop_app/modules/shopScreens/search/searchScreen.dart';
 import 'package:shop_app/shared/cubit/shopCubit/shopCubit.dart';
 import 'package:shop_app/shared/cubit/shopCubit/shopStates.dart';
 
@@ -24,7 +24,7 @@ class shopLayout extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => search(),
+                      builder: (context) => searchScreen(),
                     ),
                   );
                 },

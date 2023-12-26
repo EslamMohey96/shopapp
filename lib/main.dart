@@ -24,12 +24,12 @@ void main() async {
   Widget startPage;
   Token = cacheHelper.getData(key: 'token')== null ? '' :  cacheHelper.getData(key: 'token');
   bool? isDark = cacheHelper.getData(key: "isDark") == null ? false : true;
-  bool? onBoard = cacheHelper.getData(key: "onBoarding");
-  bool? isLogin = cacheHelper.getData(key: "isLogin");
+  bool? onBoard = cacheHelper.getData(key: "onBoarding")==null ? false : true;
+  bool? isLogin = cacheHelper.getData(key: 'token')== '' ?false : true;
 
-  if (onBoard != null) {
-    if (isLogin != null) {
-      startPage = profile();
+  if (onBoard ) {
+    if (isLogin) {
+      startPage = shopLayout();
     } else {
       startPage = logInScreen();
     }
@@ -48,15 +48,15 @@ class MyApp extends StatelessWidget {
   late final bool isDark;
   MyApp(this.isDark, this.startPage);
 
-  // Widget startPage() {}
-
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
           create: ((BuildContext context) => shopCubit()
+          ..getCategoriesData()
           ..getHomeData()
+          ..IsFavoritesData()
           ),
         ),
         BlocProvider(

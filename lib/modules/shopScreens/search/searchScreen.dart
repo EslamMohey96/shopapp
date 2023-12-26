@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
-class settings extends StatelessWidget {
-  const settings({super.key});
+class searchScreen extends StatelessWidget {
+  const searchScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
       child: Text(
         "Screen",
       ),
+    ),
     );
   }
 }
