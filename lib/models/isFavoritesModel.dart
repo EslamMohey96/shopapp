@@ -4,13 +4,12 @@ class isFavoritesModel {
 
   isFavoritesModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
-    data = json['data'] =   new Data.fromJson(json['data']) ;
+    data = json['data'] = new Data.fromJson(json['data']);
   }
-
 }
 
 class Data {
-  late List<DataF> dataF=[];
+  late List<DataF> dataF = [];
 
   Data.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
@@ -20,18 +19,15 @@ class Data {
       });
     }
   }
-
 }
 
 class DataF {
   late int id;
   late Product product;
 
-
   DataF.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    product =
-        json['product'] = new Product.fromJson(json['product']) ;
+    product = json['product'] = new Product.fromJson(json['product']);
   }
 }
 
@@ -43,7 +39,6 @@ class Product {
   late String image;
   late String name;
   late String description;
-
 
   Product.fromJson(Map<String, dynamic> json) {
     id = json['id'];

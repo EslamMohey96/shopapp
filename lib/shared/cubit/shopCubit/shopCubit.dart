@@ -25,7 +25,7 @@ class shopCubit extends Cubit<shopStates> {
   late favoritesModel favorites_model;
   Map<int, bool> favList = {};
   late isFavoritesModel isFavorites;
-  Map<int, bool> isFavList = {};
+  List<DataF> isFavList = [];
   late int is_favList = 0;
 
   List<Widget> bottomScreens = [
@@ -49,6 +49,7 @@ class shopCubit extends Cubit<shopStates> {
           'Authorization': Token,
         })
         .then((value) {
+          favList = {};
           home_model = homeModel.fromJson(value.data);
           home_model.data.products.forEach((e) {
             favList[e.id] = e.in_favorites;
@@ -80,20 +81,25 @@ class shopCubit extends Cubit<shopStates> {
 
   void changeFavoritesData(productId) {
     emit(favoritesLoadingState());
-    dioHelper.postData(url: favorites, token: Token, opt: {
-      'lang': 'en',
-      'Content-Type': 'application/json',
-      'Authorization': Token,
-    }, data: {
-      'product_id': productId,
-    }).then((value) {
-      favorites_model = favoritesModel.fromJson(value.data);
-      print(favorites_model.message);
-      favList[productId] = !favList[productId]!;
-      emit(favoritesSuccessState());
-    }).catchError((onError) {
-      emit(favoritesErrorState(onError));
-    });
+    dioHelper
+        .postData(url: favorites, token: Token, opt: {
+          'lang': 'en',
+          'Content-Type': 'application/json',
+          'Authorization': Token,
+        }, data: {
+          'product_id': productId,
+        })
+        .then((value) {
+          
+          favorites_model = favoritesModel.fromJson(value.data);
+          print(favorites_model.message);
+          favList[productId] = !favList[productId]!;
+          emit(favoritesSuccessState());
+        })
+        .then((value) => IsFavoritesData())
+        .catchError((onError) {
+          emit(favoritesErrorState(onError));
+        });
   }
 
   void IsFavoritesData() {
@@ -107,7 +113,11 @@ class shopCubit extends Cubit<shopStates> {
         'Authorization': Token,
       },
     ).then((value) {
+      isFavList = [];
       isFavorites = isFavoritesModel.fromJson(value.data);
+      isFavorites.data.dataF.forEach((e) {
+        isFavList.add(e);
+      });
       print(isFavorites.data.dataF[1].id);
       is_favList = 1;
       emit(isFavoritesSuccessState());

@@ -10,18 +10,15 @@ class onBoarding extends StatelessWidget {
   List<boardingModel> boarding = [
     boardingModel(
       image: 'assets/images/onBoard1.jpg',
-      title: "title",
-      body: "body",
+      title: "Welcome to our store!",
     ),
     boardingModel(
       image: 'assets/images/onBoard2.jpg',
-      title: "title",
-      body: "body",
+      title: "Discover our products",
     ),
     boardingModel(
       image: 'assets/images/onBoard3.jpg',
-      title: "title",
-      body: "body",
+      title: "Find what you need",
     ),
   ];
 
@@ -157,18 +154,8 @@ class onBoarding extends StatelessWidget {
           child: Text(
             '${borading.title}',
             style: TextStyle(
+              color: Colors.red,
               fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        sizeBoxH(15),
-        Expanded(
-          flex: 1,
-          child: Text(
-            '${borading.body}',
-            style: TextStyle(
-              fontSize: 14,
               fontWeight: FontWeight.bold,
             ),
           ),

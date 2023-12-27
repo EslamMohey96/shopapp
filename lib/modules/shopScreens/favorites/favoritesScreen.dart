@@ -39,18 +39,19 @@ class favoritesScreen extends StatelessWidget {
                               children: [
                                 Image(
                                   image: NetworkImage(
-                                    cubit.isFavorites.data.dataF[index].product.image
+                                    cubit.isFavList[index].product.image
                                     ),
                                   width: 120,
                                   height: 120,
                                 ),
-                                if (cubit.home_model.data.products[index]
-                                        .discount !=
+                                if (cubit.isFavList[index]
+                                        .product.discount !=
                                     0)
                                   Container(
                                     color: Colors.red,
                                     child: Text(
-                                      "Discount ${cubit.isFavorites.data.dataF[index].product.discount}%",
+                                      "Discount ${cubit.isFavList[index]
+                                        .product.discount}%",
                                       style: TextStyle(
                                           fontSize: 12, color: Colors.white),
                                     ),
@@ -60,12 +61,14 @@ class favoritesScreen extends StatelessWidget {
                           ),
                           Expanded(
                             child: Container(
-                              padding: EdgeInsets.only(right: 10),
+                              padding: EdgeInsets.symmetric(horizontal: 20),
                               color: Colors.white,
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    '${cubit.isFavorites.data.dataF[index].product.name}',
+                                    '${cubit.isFavList[index]
+                                        .product.name}',
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(fontSize: 14, height: 1.1),
@@ -75,17 +78,20 @@ class favoritesScreen extends StatelessWidget {
                                     children: [
                                       sizeBoxW(7),
                                       Text(
-                                        '${cubit.isFavorites.data.dataF[index].product.price}',
+                                        '${cubit.isFavList[index]
+                                        .product.price}',
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
                                             fontSize: 14, color: Colors.red),
                                       ),
                                       sizeBoxW(7),
-                                      if (cubit.isFavorites.data.dataF[index].product
+                                      if (cubit.isFavList[index]
+                                        .product
                                               .discount !=
                                           0)
                                         Text(
-                                          '${cubit.isFavorites.data.dataF[index].product.oldPrice}',
+                                          '${cubit.isFavList[index]
+                                        .product.oldPrice}',
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                             fontSize: 12,
@@ -99,11 +105,10 @@ class favoritesScreen extends StatelessWidget {
                                         color: Colors.red,
                                         onPressed: () {
                                           cubit.changeFavoritesData(cubit
-                                              .home_model
-                                              .data
-                                              .products[index]
+                                              .isFavList[index]
+                                        .product
                                               .id);
-                                          cubit.IsFavoritesData();
+                                          
                                         },
                                         icon: Icon(Icons.favorite),
                                       ),
@@ -121,7 +126,7 @@ class favoritesScreen extends StatelessWidget {
                       color: Colors.grey,
                       height: 1,
                     ),
-                itemCount: cubit.isFavorites.data.dataF.length,
+                itemCount: cubit.isFavList.length,
           ),
         )));
       },
