@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/shopLayout.dart';
 import 'package:shop_app/modules/onBoarding/onBoarding.dart';
 import 'package:shop_app/modules/userScreens/loginScreen/logInScreen.dart';
-import 'package:shop_app/modules/userScreens/profile/profile.dart';
 import 'package:shop_app/shared/components/blocObserver.dart';
 import 'package:shop_app/shared/components/constants.dart';
 import 'package:shop_app/shared/cubit/loginCubit/loginCubit.dart';
@@ -22,19 +21,30 @@ void main() async {
   dioHelper.init();
   await cacheHelper.init();
   Widget startPage;
-  Token = cacheHelper.getData(key: 'token')== null ? '' :  cacheHelper.getData(key: 'token');
-  bool? isDark = cacheHelper.getData(key: "isDark") == null ? false : true;
-  bool? onBoard = cacheHelper.getData(key: "onBoarding")==null ? false : true;
-  bool? isLogin = cacheHelper.getData(key: 'token')== '' ?false : true;
+  Token = cacheHelper.getData(key: 'token') == null
+      ? ''
+      : cacheHelper.getData(key: 'token');
+  bool? isDark =
+      true; //cacheHelper.getData(key: "isDark") == null ? false : cacheHelper.getData(key: "isDark");
+  bool? onBoard = cacheHelper.getData(key: "onBoarding") == null ? false : true;
+  bool? isLogin = cacheHelper.getData(key: 'token') == '' ? false : true;
 
-  if (onBoard ) {
-    if (isLogin) {
-      startPage = shopLayout();
+  if(Token==''){
+     if (onBoard) {      
+        startPage = logInScreen();
     } else {
-      startPage = logInScreen();
+      startPage = onBoarding();
     }
-  } else {
-    startPage = onBoarding();
+  }else{
+    if (onBoard) {
+      if (isLogin) {
+        startPage = shopLayout();
+      } else {
+        startPage = logInScreen();
+      }
+    } else {
+      startPage = onBoarding();
+    }
   }
 
   runApp(MyApp(
@@ -51,17 +61,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
+      providers: [        
         BlocProvider(
-          create: ((BuildContext context) => shopCubit()
-          ..getCategoriesData()
-          ..getHomeData()
-          ..IsFavoritesData()
-          ),
-        ),
-        BlocProvider(
-          create: ((BuildContext context) =>
-              onBoardingCubit()..changeDarkMode(isDarkMode: isDark)),
+          create: ((BuildContext context) => onBoardingCubit()..changeDarkMode(isDarkMode: isDark)),
         ),
         BlocProvider(
           create: (BuildContext context) => myLoginCubit(),
@@ -69,6 +71,15 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (BuildContext context) => registerCubit(),
         ),
+        BlocProvider(
+         create:(BuildContext context) => 
+         shopCubit()
+          ..getCategoriesData()
+          ..getHomeData()
+          ..IsFavoritesData()
+          ..getUserData() ,
+        ),
+        
       ],
       child: BlocConsumer<onBoardingCubit, onBoardingStates>(
         listener: (context, state) {},
@@ -78,10 +89,9 @@ class MyApp extends StatelessWidget {
             theme: lightMode,
             darkTheme: darkMode,
             themeMode: onBoardingCubit.get(context).darkMode
-                ? ThemeMode.dark
-                : ThemeMode.light,
-            home:
-             startPage,
+                ? ThemeMode.light
+                : ThemeMode.dark,
+            home: startPage,
           );
         },
       ),

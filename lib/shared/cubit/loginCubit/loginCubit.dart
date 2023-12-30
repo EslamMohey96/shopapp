@@ -3,10 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/models/loginModel.dart';
 import 'package:shop_app/shared/components/constants.dart';
 import 'package:shop_app/shared/cubit/loginCubit/loginStates.dart';
+import 'package:shop_app/shared/cubit/shopCubit/shopCubit.dart';
+import 'package:shop_app/shared/network/local/cacheHelper.dart';
 import 'package:shop_app/shared/network/remote/dioHelper/dioHelper.dart';
 import 'package:shop_app/shared/network/remote/dioHelper/endPoints.dart';
 
 class myLoginCubit extends Cubit<myLoginStates> {
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   myLoginCubit() : super(myLoginInitState());
   static myLoginCubit get(context) => BlocProvider.of(context);
   String massage = "";
@@ -26,7 +29,9 @@ class myLoginCubit extends Cubit<myLoginStates> {
     emit(myLogvisiblePasswordState());
   }
 
-  void userLogin({
+  bool loginDone = false;
+  userLogin({
+    context,
     required email,
     required password,
   }) {
@@ -39,7 +44,17 @@ class myLoginCubit extends Cubit<myLoginStates> {
       },
     ).then((value) {
       login_model = loginModel.fromJson(value.data);
+      formKey.currentState?.reset();
       emit(loginSuccessState(login_model));
+    }).then((value) {
+      cacheHelper.setData(
+        key: 'token',
+        value: myLoginCubit.get(context).login_model.data!.token,
+      ).then((value) {
+        Token = cacheHelper.getData(
+        key: 'token',
+      );
+      });
     }).catchError((onError) {
       emit(loginErrorState(onError.toString()));
     });

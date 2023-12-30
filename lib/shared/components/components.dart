@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/shared/cubit/onBoardingCubit/onBoardingCubit.dart';
+import 'package:shop_app/shared/cubit/shopCubit/shopCubit.dart';
 
 //defaultButton
 Widget defaultButton({
@@ -30,6 +32,7 @@ Widget sizeBoxW(double x) => SizedBox(
     );
 // textFormField
 Widget textFormField({
+  var context,
   required TextEditingController controller,
   required TextInputType textInputType,
   required String labelText,
@@ -44,7 +47,7 @@ Widget textFormField({
   Function()? ontap,
 }) =>
     TextFormField(
-      // initialValue: passwordController.text,
+
       controller: controller,
       keyboardType: textInputType,
       obscureText: visible,
@@ -54,7 +57,12 @@ Widget textFormField({
       onTap: ontap,
       enabled: isClickable,
       cursorColor: Colors.black,
+      style: TextStyle(
+        
+        color:onBoardingCubit.get(context).darkMode? Colors.black:Colors.white,
+      ),
       decoration: InputDecoration(
+        
         labelText: labelText,
         labelStyle: TextStyle(
           fontSize: 15,

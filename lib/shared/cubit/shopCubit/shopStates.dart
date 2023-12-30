@@ -10,6 +10,10 @@ class homeLoadingState extends shopStates {}
 
 class homeSuccessState extends shopStates {}
 
+class userVisiblePasswordState extends shopStates {}
+
+
+
 class homeErrorState extends shopStates {
   late final dynamic error;
   homeErrorState(this.error) {
@@ -41,11 +45,35 @@ class favoritesErrorState extends shopStates {
 
 class isFavoritesLoadingState extends shopStates {}
 
+class darkModeState extends shopStates {}
+
 class isFavoritesSuccessState extends shopStates {}
 
 class isFavoritesErrorState extends shopStates {
   late final dynamic error;
   isFavoritesErrorState(this.error) {
+    print(error);
+  }
+}
+
+class userModelLoadingState extends shopStates {}
+
+class userModelSuccessState extends shopStates {}
+
+class userModelErrorState extends shopStates {
+  late final dynamic error;
+  userModelErrorState(this.error) {
+    print(error);
+  }
+}
+
+class updateUserLoadingState extends shopStates {}
+
+class updateUserSuccessState extends shopStates {}
+
+class updateUserErrorState extends shopStates {
+  late final dynamic error;
+  updateUserErrorState(this.error) {
     print(error);
   }
 }

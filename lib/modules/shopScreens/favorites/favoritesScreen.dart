@@ -16,7 +16,12 @@ class favoritesScreen extends StatelessWidget {
               ? Center(
                   child: CircularProgressIndicator(),
                 )
-              : 
+              : cubit.is_favList == 2?
+              Center(
+                  child: Text(
+                    "No Favorite Product yet"
+                  ),
+                ):
         Scaffold(
             body: Container(
           color: Colors.grey,
@@ -39,19 +44,19 @@ class favoritesScreen extends StatelessWidget {
                               children: [
                                 Image(
                                   image: NetworkImage(
-                                    cubit.isFavList[index].product.image
+                                    cubit.isFavList[index].product!.image
                                     ),
                                   width: 120,
                                   height: 120,
                                 ),
                                 if (cubit.isFavList[index]
-                                        .product.discount !=
+                                        .product?.discount !=
                                     0)
                                   Container(
                                     color: Colors.red,
                                     child: Text(
                                       "Discount ${cubit.isFavList[index]
-                                        .product.discount}%",
+                                        .product?.discount}%",
                                       style: TextStyle(
                                           fontSize: 12, color: Colors.white),
                                     ),
@@ -68,7 +73,7 @@ class favoritesScreen extends StatelessWidget {
                                 children: [
                                   Text(
                                     '${cubit.isFavList[index]
-                                        .product.name}',
+                                        .product?.name}',
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(fontSize: 14, height: 1.1),
@@ -79,7 +84,7 @@ class favoritesScreen extends StatelessWidget {
                                       sizeBoxW(7),
                                       Text(
                                         '${cubit.isFavList[index]
-                                        .product.price}',
+                                        .product?.price}',
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
                                             fontSize: 14, color: Colors.red),
@@ -87,11 +92,11 @@ class favoritesScreen extends StatelessWidget {
                                       sizeBoxW(7),
                                       if (cubit.isFavList[index]
                                         .product
-                                              .discount !=
+                                              ?.discount !=
                                           0)
                                         Text(
                                           '${cubit.isFavList[index]
-                                        .product.oldPrice}',
+                                        .product?.oldPrice}',
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                             fontSize: 12,
@@ -107,7 +112,7 @@ class favoritesScreen extends StatelessWidget {
                                           cubit.changeFavoritesData(cubit
                                               .isFavList[index]
                                         .product
-                                              .id);
+                                              ?.id);
                                           
                                         },
                                         icon: Icon(Icons.favorite),

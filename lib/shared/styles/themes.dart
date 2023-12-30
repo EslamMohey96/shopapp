@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 ThemeData darkMode = ThemeData(
-  primarySwatch: Colors.teal,
   floatingActionButtonTheme: FloatingActionButtonThemeData(
     backgroundColor: Colors.red,
   ),
@@ -32,14 +31,15 @@ ThemeData darkMode = ThemeData(
     bodyText1: TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.bold,
-      color: Colors.white30,
+      color: Colors.white,
     ),
     bodyText2: TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.bold,
-      color: Colors.white54,
+      color: Colors.white,
     ),
   ),
+  
 );
 
 ThemeData lightMode = ThemeData(
@@ -70,6 +70,7 @@ ThemeData lightMode = ThemeData(
   ),
   scaffoldBackgroundColor: Colors.white,
   textTheme: TextTheme(
+    
     bodyText1: TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.bold,

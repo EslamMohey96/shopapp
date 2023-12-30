@@ -1,33 +1,36 @@
 class isFavoritesModel {
   late bool status;
-  late Data data;
+  Data? data;
 
   isFavoritesModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
-    data = json['data'] = new Data.fromJson(json['data']);
+    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
   }
 }
 
 class Data {
-  late List<DataF> dataF = [];
+  List<DataF> dataF = [];
 
   Data.fromJson(Map<String, dynamic> json) {
-    if (json['data'] != null) {
+    if (json['data'].length!=0) {
       dataF = <DataF>[];
       json['data'].forEach((v) {
         dataF.add(new DataF.fromJson(v));
       });
+    } else {
+      dataF = [];
     }
   }
 }
 
 class DataF {
   late int id;
-  late Product product;
+  Product? product;
 
   DataF.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    product = json['product'] = new Product.fromJson(json['product']);
+    product =
+        json['product'] != null ? new Product.fromJson(json['product']) : null;
   }
 }
 

@@ -10,13 +10,14 @@ class shopLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print( homeModel.fromJson(model).status );
+    print(homeModel.fromJson(model).status);
     return BlocConsumer<shopCubit, shopStates>(
       listener: (context, state) {},
       builder: (context, state) {
         shopCubit cubit = shopCubit.get(context);
         return Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             title: Text('Dynamo Store'),
             actions: [
               IconButton(

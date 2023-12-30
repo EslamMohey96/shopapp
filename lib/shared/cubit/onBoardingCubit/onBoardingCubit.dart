@@ -6,14 +6,14 @@ import 'package:shop_app/shared/network/local/cacheHelper.dart';
 class onBoardingCubit extends Cubit<onBoardingStates> {
   onBoardingCubit() : super(onBoardingInitState());
   static onBoardingCubit get(context) => BlocProvider.of(context);
-  bool darkMode = false;
   int index = 0;
 
   void changeIndex({required i}) {
     index = i;
     emit(changeIndexState());
   }
-
+// changeDarkMode
+  bool darkMode =  cacheHelper.getData(key: "isDark")==null? false:false;
   void changeDarkMode({isDarkMode}) {
     if (isDarkMode != null) {
       darkMode = isDarkMode;
@@ -28,4 +28,5 @@ class onBoardingCubit extends Cubit<onBoardingStates> {
       print(cacheHelper.getData(key: 'isDark'));
     }
   }
+
 }
