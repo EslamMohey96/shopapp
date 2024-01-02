@@ -77,3 +77,15 @@ class updateUserErrorState extends shopStates {
     print(error);
   }
 }
+
+class searchLoadingState extends shopStates {}
+
+class searchSuccessState extends shopStates {}
+
+class searchErrorState extends shopStates {
+  late final dynamic error;
+  searchErrorState(this.error) {
+    print(error);
+  }
+}
+

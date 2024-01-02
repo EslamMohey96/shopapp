@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/models/homeModel.dart';
 import 'package:shop_app/shared/components/components.dart';
+import 'package:shop_app/shared/cubit/onBoardingCubit/onBoardingCubit.dart';
 import 'package:shop_app/shared/cubit/shopCubit/shopCubit.dart';
 import 'package:shop_app/shared/cubit/shopCubit/shopStates.dart';
 
@@ -17,18 +18,20 @@ class productsScreen extends StatelessWidget {
         return Scaffold(
           body: cubit.homeModelDone == 0
               ? Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(
+                    color: Colors.red,
+                  ),
                 )
               : Container(
                   color: Colors.grey[300],
-                  child: productsBuilder(),
+                  child: productsBuilder(context),
                 ),
         );
       },
     );
   }
 
-  Widget productsBuilder() {
+  Widget productsBuilder(context) {
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       child: Column(
@@ -64,13 +67,23 @@ class productsScreen extends StatelessWidget {
             ),
             width: double.infinity,
             color: Colors.white,
-            child: Text(
-              'Categories',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 24,
-              ),
-            ),
+            child: onBoardingCubit.get(context).langMode
+                ? Text(
+                    'Categories',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                      color: Colors.red,
+                    ),
+                  )
+                : Text(
+                    'الفئات',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                      color: Colors.red,
+                    ),
+                  ),
           ),
           Container(
             width: double.infinity,
@@ -124,13 +137,23 @@ class productsScreen extends StatelessWidget {
             ),
             width: double.infinity,
             color: Colors.white,
-            child: Text(
-              'New Products',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 24,
-              ),
-            ),
+            child: onBoardingCubit.get(context).langMode
+                ? Text(
+                    'Products',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                      color: Colors.red,
+                    ),
+                  )
+                : Text(
+                    'المنتجات',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                      color: Colors.red,
+                    ),
+                  ),
           ),
           sizeBoxH(2),
           Container(
@@ -161,15 +184,21 @@ class productsScreen extends StatelessWidget {
                               0)
                             Container(
                               color: Colors.red,
-                              child: Text(
-                                "Discount ${cubit.home_model.data.products[index].discount}%",
-                                style: TextStyle(
-                                    fontSize: 12, color: Colors.white),
-                              ),
+                              child: onBoardingCubit.get(context).langMode
+                                  ? Text(
+                                      "Discount ${cubit.home_model.data.products[index].discount}%",
+                                      style: TextStyle(
+                                          fontSize: 12, color: Colors.white),
+                                    )
+                                  : Text(
+                                      "خصم ${cubit.home_model.data.products[index].discount}%",
+                                      style: TextStyle(
+                                          fontSize: 12, color: Colors.white),
+                                    ),
                             )
                         ],
                       ),
-                      sizeBoxH(7),
+                      sizeBoxH(6),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Text(
@@ -179,7 +208,7 @@ class productsScreen extends StatelessWidget {
                           style: TextStyle(fontSize: 14, height: 1.1),
                         ),
                       ),
-                      sizeBoxH(7),
+                      sizeBoxH(6),
                       Row(
                         children: [
                           sizeBoxW(7),

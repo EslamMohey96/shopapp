@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/models/registerModel.dart';
-import 'package:shop_app/modules/userScreens/loginScreen/logInScreen.dart';
+import 'package:shop_app/shared/components/constants.dart';
 import 'package:shop_app/shared/cubit/registerCubit/registerStatus.dart';
 import 'package:shop_app/shared/network/remote/dioHelper/dioHelper.dart';
 import 'package:shop_app/shared/network/remote/dioHelper/endPoints.dart';
@@ -11,7 +10,7 @@ class registerCubit extends Cubit<registerStates> {
   registerCubit() : super(registerInitStatus());
   static registerCubit get(context) => BlocProvider.of(context);
 
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> formKey =formKeyList[2];
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   var nameController = TextEditingController();

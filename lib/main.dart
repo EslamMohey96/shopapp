@@ -24,18 +24,23 @@ void main() async {
   Token = cacheHelper.getData(key: 'token') == null
       ? ''
       : cacheHelper.getData(key: 'token');
-  bool? isDark =
-      true; //cacheHelper.getData(key: "isDark") == null ? false : cacheHelper.getData(key: "isDark");
+  bool? isLight = cacheHelper.getData(key: "isLight") == null
+      ? true
+      : cacheHelper.getData(key: "isLight");
+  bool? isLang = cacheHelper.getData(key: "isLang") == null
+      ? true
+      : cacheHelper.getData(key: "isLang");
   bool? onBoard = cacheHelper.getData(key: "onBoarding") == null ? false : true;
-  bool? isLogin = cacheHelper.getData(key: 'token') == '' ? false : true;
+  bool? isLogin = Token == '' ? false : true;
+  lang = !isLang! ? "en" : "ar";
 
-  if(Token==''){
-     if (onBoard) {      
-        startPage = logInScreen();
+  if (Token == '') {
+    if (onBoard) {
+      startPage = logInScreen();
     } else {
       startPage = onBoarding();
     }
-  }else{
+  } else {
     if (onBoard) {
       if (isLogin) {
         startPage = shopLayout();
@@ -48,22 +53,26 @@ void main() async {
   }
 
   runApp(MyApp(
-    isDark,
+    isLight!,
+    isLang!,
     startPage,
   ));
 }
 
 class MyApp extends StatelessWidget {
   Widget startPage;
-  late final bool isDark;
-  MyApp(this.isDark, this.startPage);
+  late final bool isLight;
+  late final bool isLang;
+  MyApp(this.isLight, this.isLang, this.startPage);
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [        
+      providers: [
         BlocProvider(
-          create: ((BuildContext context) => onBoardingCubit()..changeDarkMode(isDarkMode: isDark)),
+          create: ((BuildContext context) => onBoardingCubit()
+            ..changeLightMode(isLightMode: isLight)
+            ..changeLangMode(isLangMode: isLang)),
         ),
         BlocProvider(
           create: (BuildContext context) => myLoginCubit(),
@@ -72,14 +81,12 @@ class MyApp extends StatelessWidget {
           create: (BuildContext context) => registerCubit(),
         ),
         BlocProvider(
-         create:(BuildContext context) => 
-         shopCubit()
-          ..getCategoriesData()
-          ..getHomeData()
-          ..IsFavoritesData()
-          ..getUserData() ,
+          create: (BuildContext context) => shopCubit()
+            ..getCategoriesData()
+            ..getHomeData()
+            ..IsFavoritesData()
+            ..getUserData(),
         ),
-        
       ],
       child: BlocConsumer<onBoardingCubit, onBoardingStates>(
         listener: (context, state) {},
@@ -88,7 +95,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: lightMode,
             darkTheme: darkMode,
-            themeMode: onBoardingCubit.get(context).darkMode
+            themeMode: onBoardingCubit.get(context).lightMode
                 ? ThemeMode.light
                 : ThemeMode.dark,
             home: startPage,

@@ -1,5 +1,5 @@
-
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/shared/components/constants.dart';
 import 'package:shop_app/shared/cubit/onBoardingCubit/onBoardingStates.dart';
 import 'package:shop_app/shared/network/local/cacheHelper.dart';
 
@@ -12,21 +12,39 @@ class onBoardingCubit extends Cubit<onBoardingStates> {
     index = i;
     emit(changeIndexState());
   }
-// changeDarkMode
-  bool darkMode =  cacheHelper.getData(key: "isDark")==null? false:false;
-  void changeDarkMode({isDarkMode}) {
-    if (isDarkMode != null) {
-      darkMode = isDarkMode;
-      emit(darkModeState());
+
+// changeLightMode
+  bool lightMode = cacheHelper.getData(key: "isLight") == null ? false : false;
+  void changeLightMode({isLightMode}) {
+    if (isLightMode != null) {
+      lightMode = isLightMode;
+      emit(lightModeState());
     } else {
-      darkMode = !darkMode;
-      print(darkMode);
+      lightMode = !lightMode;
+      print(lightMode);
       cacheHelper
-          .setData(key: "isDark", value: darkMode)
-          .then((value) => emit(darkModeState()));
-      emit(darkModeState());
+          .setData(key: "isLight", value: lightMode)
+          .then((value) => emit(lightModeState()));
+      emit(lightModeState());
       print(cacheHelper.getData(key: 'isDark'));
     }
   }
 
+  // changelangMode
+  bool langMode = cacheHelper.getData(key: "isLang") == null ? false : false;
+  void changeLangMode({isLangMode}) {
+    if (isLangMode != null) {
+      langMode = isLangMode;
+      lang = langMode?"en":'ar';
+      emit(langModeState());
+    } else {
+      langMode = !langMode;
+      lang = langMode?"en":'ar';
+      print(langMode);
+      cacheHelper
+          .setData(key: "isLang", value: langMode)
+          .then((value) => emit(langModeState()));
+      print(cacheHelper.getData(key: 'isLang'));
+    }
+  }
 }

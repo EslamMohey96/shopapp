@@ -23,8 +23,22 @@ class logInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<myLoginCubit, myLoginStates>(
       listener: (BuildContext context, myLoginStates state) {
-        if (state is loginSuccessState) {
+        if (state is changeTokenDoneState) {
           if (myLoginCubit.get(context).login_model.status) {
+            Fluttertoast.showToast(
+              msg: myLoginCubit.get(context).login_model.message,
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 5,
+              backgroundColor: Colors.green,
+              textColor: onBoardingCubit.get(context).lightMode
+                  ? Colors.white
+                  : Colors.black,
+              fontSize: 16.0,
+            );
+            cacheHelper.setData(
+                key: 'password',
+                value: myLoginCubit.get(context).passwordController.text);
             myLoginCubit.get(context).emailController.text = '';
             myLoginCubit.get(context).passwordController.text = '';
             Navigator.of(context).push(
@@ -39,150 +53,199 @@ class logInScreen extends StatelessWidget {
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 5,
               backgroundColor: Colors.red,
-              textColor:onBoardingCubit.get(context).darkMode? Colors.white:Colors.black,
+              textColor: onBoardingCubit.get(context).lightMode
+                  ? Colors.white
+                  : Colors.black,
               fontSize: 16.0,
             );
             print(myLoginCubit.get(context).login_model.message);
           }
         }
-        // else if (state is loginLoadingState) {
-        //   myLoginCubit.get(context).changeMassage(mass: "");
-        // }
       },
       builder: (BuildContext context, myLoginStates state) {
         myLoginCubit cubit = myLoginCubit.get(context);
-        return Scaffold(
-          body: Container(
-            color: onBoardingCubit.get(context).darkMode? Colors.white:Colors.black,
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Center(
-                  child: SingleChildScrollView(
-                    child: Form(
-                      key: cubit.formKey,
-                      child: Column(
-                        children: [
-                          FadeInDown(
-                            delay: Duration(milliseconds: 300),
-                            duration: Duration(milliseconds: 1500),
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Text(
-                                      'Dynamo',
-                                      style: TextStyle(
-                                        color: Colors.red,
-                                        fontSize: 40,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    sizeBoxW(10),
-                                    const Text(
-                                      'Store',
-                                      style: TextStyle(
-                                        fontSize: 40,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const Text(
-                                  'Login now to browse our hot offers.',
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    // color: onBoardingCubit.get(context).darkMode? Colors.white:Colors.black,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
+        return Directionality(
+          textDirection: onBoardingCubit.get(context).langMode
+              ? TextDirection.ltr
+              : TextDirection.rtl,
+          child: Scaffold(
+            body: Container(
+              color: onBoardingCubit.get(context).lightMode
+                  ? Colors.white
+                  : Colors.black,
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                    child: SingleChildScrollView(
+                      child: Form(
+                        key: cubit.formKey,
+                        child: Column(
+                          children: [
+                            FadeInDown(
+                              delay: Duration(milliseconds: 300),
+                              duration: Duration(milliseconds: 1500),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      onBoardingCubit.get(context).langMode
+                                          ? Text(
+                                              'Dynamo',
+                                              style: TextStyle(
+                                                color: Colors.red,
+                                                fontSize: 40,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            )
+                                          : Text(
+                                              'متجر',
+                                              style: TextStyle(
+                                                color: Colors.red,
+                                                fontSize: 40,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                      sizeBoxW(10),
+                                      onBoardingCubit.get(context).langMode
+                                          ? Text(
+                                              'Store',
+                                              style: TextStyle(
+                                                fontSize: 40,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            )
+                                          : Text(
+                                              'دينامو',
+                                              style: TextStyle(
+                                                fontSize: 40,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                    ],
                                   ),
-                                ),
-                              ],
+                                  onBoardingCubit.get(context).langMode
+                                      ? Text(
+                                          'Login now to browse our hot offers.',
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            // color: onBoardingCubit.get(context).darkMode? Colors.white:Colors.black,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        )
+                                      : Text(
+                                          'سجل الدخول الآن لتصفح عروضنا المثيرة.',
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            // color: onBoardingCubit.get(context).darkMode? Colors.white:Colors.black,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                ],
+                              ),
                             ),
-                          ),
-                          sizeBoxH(20),
-                          FadeInRight(
-                            delay: Duration(milliseconds: 300),
-                            duration: Duration(milliseconds: 1500),
-                            child: textFormField(
-                              context: context,
-                              controller: cubit.emailController,
-                              textInputType: TextInputType.emailAddress,
-                              labelText: "Email Address",
-                              prefixIcon: Icon(Icons.email_outlined),
-                              valid: (value) {
-                                if (value!.isEmpty) {
-                                  return 'email must\'n be empty ';
-                                }
-                                return null;
-                              },
+                            sizeBoxH(20),
+                            FadeInRight(
+                              delay: Duration(milliseconds: 300),
+                              duration: Duration(milliseconds: 1500),
+                              child: textFormField(
+                                context: context,
+                                controller: cubit.emailController,
+                                textInputType: TextInputType.emailAddress,
+                                labelText: onBoardingCubit.get(context).langMode
+                                    ? "Email Address"
+                                    : "عنوان البريد الإلكتروني",
+                                prefixIcon: Icons.email_outlined,
+                                valid: (value) {
+                                  if (value!.isEmpty) {
+                                    return onBoardingCubit.get(context).langMode
+                                        ? 'email must\'n be empty '
+                                        : "لا يمكن أن يكون البريد الإلكتروني فارغا ";
+                                  }
+                                  return null;
+                                },
+                              ),
                             ),
-                          ),
-                          sizeBoxH(20),
-                          FadeInLeft(
-                            delay: Duration(milliseconds: 300),
-                            duration: Duration(milliseconds: 1500),
-                            child: textFormField(
-                              context: context,
-                              controller: cubit.passwordController,
-                              textInputType: TextInputType.visiblePassword,
-                              visible: !cubit.visiblePassword,
-                              labelText: "Password",
-                              prefixIcon: Icon(Icons.lock),
-                              suffixIcon: cubit.visiblePassword
-                                  ? Icons.visibility_sharp
-                                  : Icons.visibility_off_sharp,
-                              suffixPressed: () {
-                                print(cubit.visiblePassword);
-                                cubit.changeVisiblePassword(
-                                    !cubit.visiblePassword);
-                                print(cubit.visiblePassword);
-                              },
-                              valid: (value) {
-                                if (value!.isEmpty) {
-                                  return 'password must\'n be empty ';
-                                }
-                                return null;
-                              },
+                            sizeBoxH(20),
+                            FadeInLeft(
+                              delay: Duration(milliseconds: 300),
+                              duration: Duration(milliseconds: 1500),
+                              child: textFormField(
+                                context: context,
+                                controller: cubit.passwordController,
+                                textInputType: TextInputType.visiblePassword,
+                                visible: !cubit.visiblePassword,
+                                labelText: onBoardingCubit.get(context).langMode
+                                    ? "Password"
+                                    : "كلمة السر",
+                                prefixIcon: (Icons.lock),
+                                suffixIcon: cubit.visiblePassword
+                                    ? Icons.visibility_sharp
+                                    : Icons.visibility_off_sharp,
+                                suffixPressed: () {
+                                  print(cubit.visiblePassword);
+                                  cubit.changeVisiblePassword(
+                                      !cubit.visiblePassword);
+                                  print(cubit.visiblePassword);
+                                },
+                                valid: (value) {
+                                  if (value!.isEmpty) {
+                                    return onBoardingCubit.get(context).langMode
+                                        ? 'password must\'n be empty '
+                                        : "لا يمكن أن تكون كلمة السر فارغة ";
+                                  }
+                                  return null;
+                                },
+                              ),
                             ),
-                          ),
-                          sizeBoxH(20),
-                          FadeInUp(
-                            delay: Duration(milliseconds: 300),
-                            duration: Duration(milliseconds: 1500),
-                            child: state is! loginLoadingState
-                                ? Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    child: defaultButton(
-                                      function: () {
-                                        if (cubit.formKey.currentState!
-                                            .validate()) {
-                                          cubit.userLogin(
-                                            context: context,
-                                            email: cubit.emailController.text,
-                                            password:
-                                                cubit.passwordController.text,
-                                          );
-                                        }
-                                      },
-                                      widget: (Text("LogIn")),
-                                    ),
-                                  )
-                                : Center(child: CircularProgressIndicator()),
-                          ),
-                          sizeBoxH(10),
-                          FadeInUp(
-                            delay: Duration(milliseconds: 300),
-                            duration: Duration(milliseconds: 1500),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text("don\'t have an account?"),
-                                TextButton(
+                            sizeBoxH(20),
+                            FadeInUp(
+                              delay: Duration(milliseconds: 300),
+                              duration: Duration(milliseconds: 1500),
+                              child: state is! loginLoadingState
+                                  ? Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      child: defaultButton(
+                                        function: () {
+                                          if (cubit.formKey.currentState!
+                                              .validate()) {
+                                            cubit.userLogin(
+                                              context: context,
+                                              email: cubit.emailController.text,
+                                              password:
+                                                  cubit.passwordController.text,
+                                            );
+                                          }
+                                        },
+                                        widget: onBoardingCubit
+                                                .get(context)
+                                                .langMode
+                                            ? Text("LogIn")
+                                            : Text("تسجيل الدخول"),
+                                      ),
+                                    )
+                                  : Center(
+                                      child: CircularProgressIndicator(
+                                      color: Colors.red,
+                                    )),
+                            ),
+                            sizeBoxH(10),
+                            FadeInUp(
+                              delay: Duration(milliseconds: 300),
+                              duration: Duration(milliseconds: 1500),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  onBoardingCubit.get(context).langMode
+                                      ? Text("don\'t have an account?")
+                                      : Text("ليس لديك حساب؟"),
+                                  TextButton(
                                     onPressed: () {
                                       cubit.emailController.text = '';
                                       cubit.passwordController.text = '';
@@ -193,21 +256,30 @@ class logInScreen extends StatelessWidget {
                                                 const registerScreen()),
                                       );
                                     },
-                                    child: const Text(
-                                      'Register Now',
-                                      style: const TextStyle(
-                                        color: Colors.red,
-                                      ),
-                                    ))
-                              ],
-                            ),
-                          )
-                        ],
+                                    child: onBoardingCubit.get(context).langMode
+                                        ? Text(
+                                            'Register Now',
+                                            style: const TextStyle(
+                                              color: Colors.red,
+                                            ),
+                                          )
+                                        : Text(
+                                            'سجل الآن',
+                                            style: const TextStyle(
+                                              color: Colors.red,
+                                            ),
+                                          ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );

@@ -9,7 +9,7 @@ import 'package:shop_app/shared/network/remote/dioHelper/dioHelper.dart';
 import 'package:shop_app/shared/network/remote/dioHelper/endPoints.dart';
 
 class myLoginCubit extends Cubit<myLoginStates> {
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> formKey = formKeyList[1];
   myLoginCubit() : super(myLoginInitState());
   static myLoginCubit get(context) => BlocProvider.of(context);
   String massage = "";
@@ -42,21 +42,33 @@ class myLoginCubit extends Cubit<myLoginStates> {
         "email": email,
         "password": password,
       },
+      opt:{
+        "lang":lang,
+        "Content-Type":"application/json"
+      } 
     ).then((value) {
       login_model = loginModel.fromJson(value.data);
       formKey.currentState?.reset();
       emit(loginSuccessState(login_model));
-    }).then((value) {
-      cacheHelper.setData(
-        key: 'token',
-        value: myLoginCubit.get(context).login_model.data!.token,
-      ).then((value) {
-        Token = cacheHelper.getData(
+    }).then((value) => changeToken()).catchError((onError) {
+      emit(loginErrorState(onError.toString()));
+    });
+  }
+
+  bool changeTokenDone = false;
+  changeToken() {
+    cacheHelper
+        .setData(
+      key: 'token',
+      value: login_model.data!.token,
+    )
+        .then((value) {
+      Token = cacheHelper.getData(
         key: 'token',
       );
-      });
-    }).catchError((onError) {
-      emit(loginErrorState(onError.toString()));
+    }).then((value) {
+      changeTokenDone = true;
+      emit(changeTokenDoneState());
     });
   }
 }

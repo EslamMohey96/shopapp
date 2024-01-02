@@ -15,7 +15,9 @@ class categoriesScreen extends StatelessWidget {
         return Scaffold(
           body:cubit.categoriesModelDone==0
               ? Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(
+                    color: Colors.red,
+                  ),
                 )
               : ListView.separated(
                 itemBuilder: (context, index) =>buildCatItem(index), 

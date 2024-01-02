@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:shop_app/shared/network/local/cacheHelper.dart';
 
 String baseURL = 'https://student.valuxapps.com/api/';
@@ -10,3 +11,7 @@ Map<String, dynamic> users = {
 };
 
 String Token = '';
+String lang = 'en';
+List<GlobalObjectKey<FormState>> formKeyList = List.generate(10, (index) => GlobalObjectKey<FormState>(index));
+
+

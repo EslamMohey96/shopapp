@@ -6,6 +6,8 @@ class myLoginInitState extends myLoginStates {}
 
 class myLogvisiblePasswordState extends myLoginStates {}
 
+class changeTokenDoneState extends myLoginStates {}
+
 class getAllUsersSuccessState extends myLoginStates {}
 
 class getAllUsersErrorState extends myLoginStates {

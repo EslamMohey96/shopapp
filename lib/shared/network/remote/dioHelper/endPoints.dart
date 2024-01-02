@@ -6,6 +6,7 @@ const categories = "categories";
 const favorites = "favorites";
 const updateProfile = "update-profile";
 const register = "register";
+const search = "products/search";
 
 
 

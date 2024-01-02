@@ -7,7 +7,7 @@ ThemeData darkMode = ThemeData(
   ),
   appBarTheme: AppBarTheme(
     iconTheme: IconThemeData(
-      color: Colors.white,
+      color: Colors.red,
     ),
     titleTextStyle: TextStyle(
       fontSize: 20,
@@ -23,8 +23,8 @@ ThemeData darkMode = ThemeData(
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     type: BottomNavigationBarType.fixed,
     backgroundColor: Colors.black12,
-    selectedItemColor: Colors.white,
-    unselectedItemColor: Colors.white10,
+    selectedItemColor: Colors.red,
+    unselectedItemColor: Colors.grey,
   ),
   scaffoldBackgroundColor: Colors.black12,
   textTheme: TextTheme(
@@ -48,6 +48,7 @@ ThemeData lightMode = ThemeData(
     foregroundColor: Colors.black,
   ),
   appBarTheme: AppBarTheme(
+    
     iconTheme: IconThemeData(
       color: Colors.red,
     ),

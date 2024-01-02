@@ -7,31 +7,40 @@ import 'package:shop_app/shared/network/local/cacheHelper.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class onBoarding extends StatelessWidget {
-  List<boardingModel> boarding = [
-    boardingModel(
-      image: 'assets/images/onBoard1.jpg',
-      title: "Welcome to our store!",
-    ),
-    boardingModel(
-      image: 'assets/images/onBoard2.jpg',
-      title: "Discover our products",
-    ),
-    boardingModel(
-      image: 'assets/images/onBoard3.jpg',
-      title: "Find what you need",
-    ),
-  ];
 
   PageController onBoardingController = PageController();
+  
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    List<boardingModel> boarding = [
+    boardingModel(
+      image: 'assets/images/onBoard1.jpg',
+      title:onBoardingCubit.get(context).langMode ?
+       "Welcome to our store!":
+        "مرحبا بكم في متجرنا!",
+    ),
+    boardingModel(
+      image: 'assets/images/onBoard2.jpg',
+      title: onBoardingCubit.get(context).langMode ?
+      "Discover our products":
+      "اكتشف منتجاتنا",
+    ),
+    boardingModel(
+      image: 'assets/images/onBoard3.jpg',
+      title: onBoardingCubit.get(context).langMode ?
+      "Find what you need":
+      "اعثر على ما تحتاجه",
+    ),
+  ];
+    return Directionality(
+      textDirection: onBoardingCubit.get(context).langMode ? TextDirection.ltr:TextDirection.rtl,
+      child: Scaffold(
+      appBar: AppBar(        
         actions: [
           TextButton(
             style: TextButton.styleFrom(
-              fixedSize: const Size(50, 20),
+              fixedSize: const Size(70, 30),
               backgroundColor: Colors.red,
               foregroundColor: Colors.black,
               textStyle: const TextStyle(
@@ -52,8 +61,14 @@ class onBoarding extends StatelessWidget {
               ));
               
             },
-            child: Text(
-              "Skip",
+           
+            child: onBoardingCubit.get(context).langMode ?
+            Text(               
+              ("Skip")             
+            )
+            :Text(               
+              "تخطي",
+              textDirection:TextDirection.rtl,
             ),
           ),
           sizeBoxW(10),
@@ -66,9 +81,10 @@ class onBoarding extends StatelessWidget {
             Expanded(
               flex: 6,
               child: PageView.builder(
+                // scrollDirection: Axis.horizontal,
                 controller: onBoardingController,
                 itemBuilder: (context, index) =>
-                    boardingItem(borading: boarding[index]),
+                    boardingItem(borading: boarding[index],context: context),
                 itemCount: boarding.length,
                 onPageChanged: (index) =>
                     onBoardingCubit.get(context).changeIndex(i: index),
@@ -78,6 +94,7 @@ class onBoarding extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Row(
+                // : ,
                 children: [
                   SmoothPageIndicator(
                       controller: onBoardingController,
@@ -132,10 +149,12 @@ class onBoarding extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
+    )
+,
+      ) ;
+       }
 
-  Widget boardingItem({required boardingModel borading}) {
+  Widget boardingItem({required boardingModel borading,context}) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -151,9 +170,20 @@ class onBoarding extends StatelessWidget {
         sizeBoxH(30),
         Expanded(
           flex: 2,
-          child: Text(
+          child: onBoardingCubit.get(context).langMode ?
+             Text(
             '${borading.title}',
             style: TextStyle(
+              
+              color: Colors.red,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          )
+            : Text(
+            '${borading.title}',
+            style: TextStyle(
+              
               color: Colors.red,
               fontSize: 24,
               fontWeight: FontWeight.bold,

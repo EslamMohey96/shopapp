@@ -36,40 +36,47 @@ Widget textFormField({
   required TextEditingController controller,
   required TextInputType textInputType,
   required String labelText,
-  required Icon prefixIcon,
+  required IconData prefixIcon,
   required String? Function(String?)? valid,
   bool visible = false,
   bool isClickable = true,
   IconData? suffixIcon,
   Function()? suffixPressed,
-  Function? onSubmit,
-  Function? onChange,
+  Function(String?)? onSubmit,
+  Function(String?)? onChange,
   Function()? ontap,
 }) =>
     TextFormField(
-
       controller: controller,
       keyboardType: textInputType,
       obscureText: visible,
-      // onFieldSubmitted: onSubmit,
+      onFieldSubmitted: onSubmit,
       // onChanged: onChange,
       validator: valid,
       onTap: ontap,
+      onChanged: onChange,
+      
       enabled: isClickable,
       cursorColor: Colors.black,
       style: TextStyle(
-        
-        color:onBoardingCubit.get(context).darkMode? Colors.black:Colors.white,
+        color: onBoardingCubit.get(context).lightMode
+            ? Colors.black
+            : Colors.white,
+          
       ),
       decoration: InputDecoration(
-        
         labelText: labelText,
-        labelStyle: TextStyle(
+        labelStyle:  TextStyle(          
+          // textDirection: TextDirection.rtl,
           fontSize: 15,
         ),
-        prefixIcon: prefixIcon,
+        prefixIcon: Icon(
+          prefixIcon,
+        ),
         suffixIcon: IconButton(
-          icon: Icon(suffixIcon),
+          icon: Icon(
+            suffixIcon,
+          ),
           onPressed: suffixPressed,
         ),
         enabledBorder: OutlineInputBorder(
